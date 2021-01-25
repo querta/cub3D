@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 18:34:35 by mmonte            #+#    #+#              #
-#    Updated: 2021/01/24 18:57:58 by mmonte           ###   ########.fr        #
+#    Updated: 2021/01/25 15:24:53 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME):	$(OBJ)
 	$(CC) $(FLAGS) -c $< -o $@
 
 bonus:	$(OBJ) $(OBJ_BONUS)
-		ar -rc $(NAME) $(OBJ) $(OBJ_BONUS)
+	@ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)

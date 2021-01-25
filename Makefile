@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/01/24 18:55:41 by mmonte           ###   ########.fr        #
+#    Updated: 2021/01/25 19:09:02 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ INCLUDES		= -I $(HEADER) -I $(LIBFT_DIR) -I $(MLX_DIR)
 LFLAGS	= -L $(LIBFT_DIR) -lft $(MLX_FLAGS) -lm
 MLX_FLAGS	= -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-SRC = get_next_line.c main.c
+SRC = get_next_line.c main.c parser.c
 
 OBJ =	$(addprefix $(SRC_DIR), $(SRC:.c=.o)) 
 
@@ -51,7 +51,7 @@ $(NAME): $(OBJ) libft mlx
 	@printf "\e[1;36mCompiling $<\e[0m\n"
 
 mlx: 
-	@make -C $(MLX_DIR)
+	@make -C $(MLX_DIR) > /dev/null
 	@cp $(MLX_DIR)$(MLX) .
 	@printf "\e[1;36mLib \e[1;32m'libmlx.dylib' \e[1;36mcreated\e[0m\n"
 

@@ -6,37 +6,25 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/24 18:49:02 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/01/25 19:11:12 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
-	// (void)argc;
-	// (void)argv;
-	int		fd;
-	char	*line;
+	t_list	*head;
+	t_set	set;
+	char	**map;
 
-	if (argc == 1)
-		fd = 0;
-	else if (argc == 2)
-		fd = open(argv[1], O_RDONLY);
-	else
-		return (2);
-	while (get_next_line(fd, &line) == 1)
-	{
-		ft_putstr_fd(line, 1);
-		ft_putchar_fd('\n', 1);
-		free(line);
-	}
-	ft_putstr_fd(line, 1);
-	ft_putchar_fd('\n', 1);
-	free(line);
-	
-	if (argc == 2)
-		close(fd);
-	
+	ft_bzero(&set, sizeof(set));
+	map = main_parser(argc, argv[1], &set, &head);
+	// int i = -1;
+	// while (map[++i])
+	// 	ft_putendl_fd(map[i], 1);
+	// printf("r:%s\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.r, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
+
 	return (0);
 }

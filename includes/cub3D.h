@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/24 18:39:55 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/01/25 19:08:46 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # include "./utils.h"
 # include <fcntl.h>
 
-int		main(int argc, char **argv);
+typedef	struct	s_settings
+{
+	char *r;
+	char *no;
+	char *so;
+	char *we;
+	char *ea;
+	char *s;
+	char *f;
+	char *c;
+}				t_set;
+
+
+int				main(int argc, char **argv);
+char			**main_parser(int argc, char *argv, t_set *set, t_list **head);
 
 #endif
