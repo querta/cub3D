@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # make re > /dev/null
-make 
+make re
 # printf "\e[32myour program output: \e[0m\n"
 # if $1
 # then
