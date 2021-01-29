@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/24 16:16:45 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/29 16:04:17 by mmonte           ###   ########.fr       */
+/*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
+/*   Updated: 2021/01/29 16:04:12 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFFER_SIZE 100
+#include "cub3D.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "../src/libft/libft.h"
-
-int		get_next_line(int fd, char **line);
-int		player_ch (char c);
-
-#endif
+int		player_ch (char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/26 19:36:27 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/01/29 16:11:39 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	parse_res(t_set *set, char *par)
 	par++;
 	while(*par)
 		set->size_y = set->size_y * 10 + *par++ - '0';
+
+	// mlx_get_screen_size(mlx, &max_width, &max_height)
 }
 
 static	char	**make_map(t_list **mlist, int size)
@@ -45,12 +47,14 @@ int				check_map (char c)
 {
 	if (c == ' ' || c == '0' || c == '1' || c == '2')
 		return (1);
-	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	else if (player_ch(c))
 		return (1);
+	// else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	// 	return (1);
 	return (0);
 }
 
-static	int		parse_map(t_list **mlist, t_set *set, char *line)
+static	int		parse_map(t_set *set, char *line)
 {
 	if (line[0] == 'R' && line[1] == ' ')
 		parse_res(set, &line[2]);
@@ -69,22 +73,20 @@ static	int		parse_map(t_list **mlist, t_set *set, char *line)
 	else if (line[0] == 'C' && line[1] == ' ')
 		set->c = &(line[3]);
 	else if (check_map(line[0]))
-		ft_lstadd_back(mlist, ft_lstnew(line));
+		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else
 		return (0);
-	// else if (line[0] == '\0')
-	// 	return (0);
 	return (1);
 }
 
-char			**main_parser(int argc, char *argv, t_set *set, t_list **mlist)
+char			**main_parser(int argc, char *argv, t_set *set)
 {
 	int		fd;
 	char	*line;
 	char	**map;
 
 	line = NULL;
-	*mlist = NULL;
+	// *set->mlist = NULL;
 	fd = 0;
 	if (argc == 1)
 		fd = 0;
@@ -93,9 +95,9 @@ char			**main_parser(int argc, char *argv, t_set *set, t_list **mlist)
 	else
 		return (NULL);
 	while (get_next_line(fd, &line))
-		parse_map(mlist, set, line);
-	parse_map(mlist, set, line);
-	map = make_map(mlist, ft_lstsize(*mlist));
+		parse_map(set, line);
+	parse_map(set, line);
+	map = make_map(&set->mlist, ft_lstsize(set->mlist));
 	if (argc == 2)
 		close(fd);
 	return (map);

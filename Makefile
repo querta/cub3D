@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/01/26 20:21:09 by mmonte           ###   ########.fr        #
+#    Updated: 2021/01/29 16:02:47 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC_DIR = src/
 LIBFT_DIR = $(SRC_DIR)libft/
 MLX_DIR = $(SRC_DIR)minilibx_mms/
 
-SRC = get_next_line.c main.c parser.c processor.c
+SRC = get_next_line.c main.c parser.c processor.c utils.c
 
 OBJ =	$(addprefix $(SRC_DIR), $(SRC:.c=.o)) 
 

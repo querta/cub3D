@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/28 18:12:37 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/01/29 17:07:07 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
-typedef struct s_point {
-	int x;
-	int y;
-}			t_point;
-
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
@@ -33,9 +28,8 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-// TODO: сделать нормальное масштабирование
 
-void img_scale(t_point point, void	*mlx, void	*mlx_win)
+void img_scale(t_point point, t_set *set, int color)
 {
 	t_point end;
 
@@ -46,13 +40,13 @@ void img_scale(t_point point, void	*mlx, void	*mlx_win)
 	while (point.y < end.y)
 	{
 		while (point.x < end.x)
-			mlx_pixel_put(mlx, mlx_win, point.x++, point.y, 0xFFFFFF);
+			mlx_pixel_put(set->mlx->mlx, set->mlx->win, point.x++, point.y, color);
 		point.x -= SCALE;
 		point.y++;
 	}
 }
 
-void	draw_map(t_set *set, void	*mlx, void	*mlx_win)
+void	draw_map(t_set *set)
 {
 	t_point point;
 
@@ -63,74 +57,29 @@ void	draw_map(t_set *set, void	*mlx, void	*mlx_win)
 		while (set->map[point.y][point.x])
 		{
 			if (set->map[point.y][point.x] == '1')
-				img_scale(point, mlx, mlx_win);
+				img_scale(point, set, 0xFFFFFF);
+			if (player_ch(set->map[point.y][point.x]))
+				img_scale(point, set, 0x0000FF);
 			point.x++;
 		}
 		point.y++;
 	}
-	
-	// int		x = 5;
-	// int		y = 5;
-	// int		i;
-	// int		k;
-	
-	// i = 0;
-	// k = 0;
-	// while(set->map[k])
-	// {
-	// 	i = 0;
-	// 	while(set->map[i])
-	// 	{
-	// 		if (set->map[i][k] == '1')
-	// 			mlx_pixel_put(mlx, mlx_win, k, i, 0xFFFFFF);
-	// 		i++;
-	// 	}
-	// 	k++;
-	// }
-	// while(k < 640)
-	// {
-	// 	i = 0;
-	// 	while(i < 640)
-	// 	{
-	// 		if (set->map[i / SCALE][k / SCALE] == '1')
-	// 			mlx_pixel_put(mlx, mlx_win, i, k, 0xFFFFFF);
-	// 		i++;
-	// 	}
-	// 	k++;
-	// }
-	
-	// while (y++ < 106)
-	// {
-	// 	x = 100;
-	// 	while(x++ < 106)
-	// 		mlx_pixel_put(mlx, mlx_win, x, y, 0xFFFFFF);
-	// }
-
 }
 
-int			cube_start(t_set *set)
+int			cube_start(t_set *s)
 {
-	void	*mlx;
-	void	*mlx_win;
-    // t_data  img;
+	t_data img;
 
-	
 	// printf("set-r:%s\nsize_x=%d, size_y=%d", set->r, set->size_x, set->size_y);
-	mlx = mlx_init();
-    // img = mlx_new_image(mlx, 1920, 1080);
+	s->mlx->mlx = mlx_init();
 
-	mlx_win = mlx_new_window(mlx, set->size_x, set->size_y, "kek");
-	// img.img = mlx_new_image(mlx, 1920, 1080);
-    // img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-    //                              &img.endian);
-
-    // my_mlx_pixel_put(&img, 100, 100, 0x00FF0000);
-    // mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-
-	// mlx_pixel_put (mlx, mlx_win, 100, 100, 0x00FF0000);
-	draw_map(set, mlx, mlx_win);
-	mlx_loop(mlx);
-	// printf("line_lengh:%d bpp:%d", img.line_length,	img.bits_per_pixel);
+	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+	img.img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, img.img, 0, 0);
+	// draw_map(s);
+	mlx_loop(s->mlx->mlx);
 
 	return (0);
 }
