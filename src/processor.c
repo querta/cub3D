@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/29 17:07:07 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/01/30 11:42:44 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 
 
-void img_scale(t_point point, t_set *set, int color)
+void img_scale(t_point point, t_set *set, int color, t_data *img)
 {
 	t_point end;
 
+	(void)set;
 	end.x = (point.x + 1) * SCALE;
 	end.y = (point.y + 1) * SCALE;
 	point.x *= SCALE;
@@ -40,13 +41,14 @@ void img_scale(t_point point, t_set *set, int color)
 	while (point.y < end.y)
 	{
 		while (point.x < end.x)
-			mlx_pixel_put(set->mlx->mlx, set->mlx->win, point.x++, point.y, color);
+			my_mlx_pixel_put(img, point.x++, point.y, color);
+			// mlx_pixel_put(set->mlx->mlx, set->mlx->win, point.x++, point.y, color);
 		point.x -= SCALE;
 		point.y++;
 	}
 }
 
-void	draw_map(t_set *set)
+void	draw_map(t_set *set, t_data *img)
 {
 	t_point point;
 
@@ -57,9 +59,9 @@ void	draw_map(t_set *set)
 		while (set->map[point.y][point.x])
 		{
 			if (set->map[point.y][point.x] == '1')
-				img_scale(point, set, 0xFFFFFF);
+				img_scale(point, set, 0xFFFFFF, img);
 			if (player_ch(set->map[point.y][point.x]))
-				img_scale(point, set, 0x0000FF);
+				img_scale(point, set, 0x0000FF, img);
 			point.x++;
 		}
 		point.y++;
@@ -76,9 +78,11 @@ int			cube_start(t_set *s)
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
 	img.img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	// my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);	
+	draw_map(s, &img);
 	mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, img.img, 0, 0);
-	// draw_map(s);
+	
+
 	mlx_loop(s->mlx->mlx);
 
 	return (0);
