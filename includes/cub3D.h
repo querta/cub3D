@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/29 16:22:46 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/02 15:06:11 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,28 @@ typedef struct s_mlx
 	void *img;
 }				t_mlx;
 
-typedef struct s_point {
+typedef struct  s_img
+{
+    void        *img;
+    char        *addr;
+    int         bits_per_pixel;
+    int         line_length;
+    int         endian;
+}               t_img;
+
+typedef struct s_point
+{
 	int x;
 	int y;
 }			t_point;
+
+typedef struct s_player
+{
+	int x;
+	int y;
+	char pos;
+}				t_player;
+
 
 typedef	struct	s_settings
 {
@@ -45,8 +63,11 @@ typedef	struct	s_settings
 	char *f;
 	char *c;
 	char **map;
+	t_player pl;
 	t_mlx *mlx;
 	t_list *mlist;
+	t_img *img;
+	// t_img *img;
 }				t_set;
 
 int				main(int argc, char **argv);
