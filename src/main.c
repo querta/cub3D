@@ -6,13 +6,13 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/02 13:06:20 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/03 16:53:19 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void create_structs(int argc, char *argv)
+int create_structs(int argc, char *argv)
 {
 	t_list	*mlist;
 	t_set	set;
@@ -27,9 +27,15 @@ void create_structs(int argc, char *argv)
 	ft_bzero(&player, sizeof(player));
 	set.mlx = &mlx;
 	set.mlist = mlist;
-	set.map = main_parser(argc, argv, &set);
+	// set.map = main_parser(argc, argv, &set);
+	if (!main_parser(argc, argv, &set))
+	{
+		printf("owibka karti\n");
+		return (0);
+	}
 	// set.map = main_parser(argc, argv, &set, &set.mlist);
 	cube_start(&set);
+	return (1);
 }
 
 int		main(int argc, char **argv)

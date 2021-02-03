@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/02 12:56:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/03 17:18:06 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,58 @@ static void	parse_res(t_set *set, char *par)
 	// mlx_get_screen_size(mlx, &max_width, &max_height)
 }
 
-static	char	**make_map(t_list **mlist, int size)
+int		player_parser(t_set *s)
+{
+	int i;
+	int y;
+	char *pos;
+	char *c;
+	int ret;
+
+	ret = 0;
+	c = "NSEW";
+	i = 0;
+	y = 0;
+	while(s->map[y])
+	{
+		i = 0;
+		while (c[i])
+		{
+			if ((pos = ft_strchr(s->map[y], c[i])))
+			{
+				if (!s->pl.pos)
+				{
+					s->pl.pos = c[i];
+					s->pl.x = (double)(pos - &s->map[y][0]);
+					s->pl.y = (double)y;
+				}
+				else
+					return (0);
+			}
+			i++;
+		}
+		y++;
+	}
+	if (!s->pl.pos)
+		return (0);
+	return (1);
+}
+
+int		map_checker(t_set *set)
+{
+	if (player_parser(set) == 0)
+		return (0);
+	return (1);
+}
+
+
+static	char	**make_map(t_set *s, int size)
 {
 	t_list	*tmp;
 	char	**map;
 	int		i;
 
-	tmp = *mlist;
+	tmp = s->mlist;
 	map = ft_calloc(size + 1, sizeof(char *));
 	i = -1;
 	while (tmp)
@@ -43,15 +88,15 @@ static	char	**make_map(t_list **mlist, int size)
 	return (map);
 }
 
-int				check_map (char c)
+int				check_mapsign(char c)
 {
 	if (c == ' ' || c == '0' || c == '1' || c == '2')
 		return (1);
-	else if (player_ch(c))
-		return (1);
-	// else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	// else if (player_ch(c))
 	// 	return (1);
-	return (0);
+	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (-1);
 }
 
 static	int		parse_map(t_set *set, char *line)
@@ -72,18 +117,18 @@ static	int		parse_map(t_set *set, char *line)
 		set->f = &(line[3]);
 	else if (line[0] == 'C' && line[1] == ' ')
 		set->c = &(line[3]);
-	else if (check_map(line[0]))
+	else if (check_mapsign(line[0]))
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else
-		return (0);
+		return (-1);
 	return (1);
 }
 
-char			**main_parser(int argc, char *argv, t_set *set)
+int			main_parser(int argc, char *argv, t_set *set)
 {
 	int		fd;
 	char	*line;
-	char	**map;
+	// char	**map;
 
 	line = NULL;
 	// *set->mlist = NULL;
@@ -93,12 +138,14 @@ char			**main_parser(int argc, char *argv, t_set *set)
 	else if (argc == 2)
 		fd = open(argv, O_RDONLY);
 	else
-		return (NULL);
+		return (0);
 	while (get_next_line(fd, &line))
 		parse_map(set, line);
 	parse_map(set, line);
-	map = make_map(&set->mlist, ft_lstsize(set->mlist));
+	set->map = make_map(set, ft_lstsize(set->mlist));
+	if (!map_checker(set))
+		return (0);
 	if (argc == 2)
 		close(fd);
-	return (map);
+	return (1);
 }
