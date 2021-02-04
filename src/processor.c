@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/04 18:29:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 18:38:48 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,45 @@ void img_scale(t_point point, t_set *s, int color)
 
 /* сделать лучи! */
 
+// 	if (keycode == 13 || keycode == 126)	// up
+// 	{
+// 		s->pl.y -= sin(s->pl.dir) * 0.25;
+// 		s->pl.x -= cos(s->pl.dir) * 0.25;
+// 	}
+// 	if (keycode == 1 || keycode == 125)		// down
+// 	{
+// 		s->pl.y += sin(s->pl.dir) * 0.25;
+// 		s->pl.x += cos(s->pl.dir) * 0.25;
+// 	}
+// 	if (keycode == 0 || keycode == 123)		// left
+// 		s->pl.dir -= 0.1;
+// 	if (keycode == 2 || keycode == 124)		//right
+		// s->pl.dir += 0.1;
+
 void	draw_player(t_set *s)
 {
 	t_dpoint point;
 	t_dpoint end;
-	double coords;
+	double speed;
 	
-	coords = (double)SPEED / 100;
+	speed = (double)SPEED / 30;
 	if (s->mlx->img)
 		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
 	ft_bzero(&point, sizeof(t_point));
 	if (s->pl.up)
-		s->pl.y -= coords;
+	{
+		s->pl.y -= sin(s->pl.dir) * speed;
+		s->pl.x -= cos(s->pl.dir) * speed;
+	}
 	if (s->pl.down)
-		s->pl.y += coords;
+	{
+		s->pl.y += sin(s->pl.dir) * speed;
+		s->pl.x += cos(s->pl.dir) * speed;
+	}
 	if (s->pl.left)
-		s->pl.x -= coords;
+		s->pl.dir -= 0.1;
 	if (s->pl.right)
-		s->pl.x += coords;
+		s->pl.dir += 0.1;
 	point.x = s->pl.x;
 	point.y = s->pl.y;
 	end.x = (point.x + 1) * SCALE;
@@ -83,8 +104,43 @@ void	draw_player(t_set *s)
 	// point.x = (float)s->pl.x;
 	// point.y = (float)s->pl.y;
 	// img_scale(point, s, 0x0000FF);
-
 }
+
+// void	draw_player(t_set *s)	// без углов
+// {
+// 	t_dpoint point;
+// 	t_dpoint end;
+// 	double coords;
+	
+// 	coords = (double)SPEED / 100;
+// 	if (s->mlx->img)
+// 		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
+// 	ft_bzero(&point, sizeof(t_point));
+// 	if (s->pl.up)
+// 		s->pl.y -= coords;
+// 	if (s->pl.down)
+// 		s->pl.y += coords;
+// 	if (s->pl.left)
+// 		s->pl.x -= coords;
+// 	if (s->pl.right)
+// 		s->pl.x += coords;
+// 	point.x = s->pl.x;
+// 	point.y = s->pl.y;
+// 	end.x = (point.x + 1) * SCALE;
+// 	end.y = (point.y + 1) * SCALE;
+// 	point.x *= SCALE;
+// 	point.y *= SCALE;
+// 	while (point.y < end.y)
+// 	{
+// 		while (point.x < end.x)
+// 			my_mlx_pixel_put(s->img, point.x++, point.y, 0x0000FF);
+// 		point.x -= SCALE;
+// 		point.y++;
+// 	}
+// 	// point.x = (float)s->pl.x;
+// 	// point.y = (float)s->pl.y;
+// 	// img_scale(point, s, 0x0000FF);
+// }
 
 void	draw_ray(t_set *s)
 {
