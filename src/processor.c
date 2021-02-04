@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/04 19:56:58 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 20:18:41 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void img_scale(t_point point, t_set *s, int color)
 	}
 }
 
-/* сделать лучи! */
+/* пофиксить сегу в draw ray
+сделать несколько лучей */
 
 // 	if (keycode == 13 || keycode == 126)	// up
 // 	{
@@ -101,9 +102,6 @@ void	draw_player(t_set *s)
 		point.x -= SCALE;
 		point.y++;
 	}
-	// point.x = (float)s->pl.x;
-	// point.y = (float)s->pl.y;
-	// img_scale(point, s, 0x0000FF);
 }
 
 void	ray_processor(t_set *s)
@@ -129,24 +127,10 @@ void	ray_processor(t_set *s)
 
 void	draw_ray(t_set *s)
 {
-	// if (s->mlx->img)
-	// 	mlx_destroy_image(s->mlx->mlx, s->mlx->img);
-	// while (s->map[(int)(s->pl.y / SCALE)][(int)(s->pl.x / SCALE)] != '1')
-	// {
-	// 	s->pl.x += cos(s->pl.dir);
-	// 	s->pl.y += sin(s->pl.dir);
-		// my_mlx_pixel_put(s->mlx->win, s->pl.x, s->pl.y, 0x990099);
-	// }
-	t_dpoint point;
 	t_dpoint end;
 
 	if (s->mlx->img)
 		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
-	// ft_bzero(&point, sizeof(t_point));
-	// point.x = s->pl.x * SCALE;
-	// point.y = s->pl.y * SCALE;
-	// end.x += cos(s->pl.dir);
-	// end.y += sin(s->pl.dir);
 	end.x = s->pl.x * SCALE;
 	end.y = s->pl.y * SCALE;
 	while(s->map[(int)(end.y / SCALE)][(int)(end.x / SCALE)] != '1')
@@ -155,10 +139,6 @@ void	draw_ray(t_set *s)
 		end.x -= cos(s->pl.dir);
 		end.y -= sin(s->pl.dir);
 	}
-			// my_mlx_pixel_put(s->img, s->pl.x * SCALE, s->pl.y * SCALE, 0x666666);
-		// point.x -= SCALE;
-		// point.y++;
-	// }
 }
 
 // void	draw_player(t_set *s)	// без углов
