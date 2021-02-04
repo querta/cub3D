@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/03 17:18:06 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 17:08:51 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,37 @@ static void	parse_res(t_set *set, char *par)
 	// mlx_get_screen_size(mlx, &max_width, &max_height)
 }
 
+int player_fill(t_set *s, char *map, int y, char c)
+{
+	char *pos;
+
+	pos = 0;
+	if ((pos = ft_strchr(map, c)))
+	{
+		if (!s->pl.pos)
+		{
+			s->pl.pos = c;
+			s->pl.x = (double)(pos - &map[0]);
+			s->pl.y = (double)y;
+			if (c == 'N')
+				s->pl.dir = 0;
+			if (c == 'S')
+				s->pl.dir = 3.1416; // 180
+			if (c == 'E')
+				s->pl.dir = 1.5708; // 90
+			if (c == 'W')
+				s->pl.dir = 4.7124; // 270
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int		player_parser(t_set *s)
 {
 	int i;
 	int y;
-	char *pos;
 	char *c;
 	int ret;
 
@@ -43,17 +69,8 @@ int		player_parser(t_set *s)
 		i = 0;
 		while (c[i])
 		{
-			if ((pos = ft_strchr(s->map[y], c[i])))
-			{
-				if (!s->pl.pos)
-				{
-					s->pl.pos = c[i];
-					s->pl.x = (double)(pos - &s->map[y][0]);
-					s->pl.y = (double)y;
-				}
-				else
-					return (0);
-			}
+			if (!player_fill(s, s->map[y], y, c[i]))
+				return (0);
 			i++;
 		}
 		y++;

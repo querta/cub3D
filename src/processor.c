@@ -6,13 +6,14 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/03 18:39:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 18:29:30 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 #include <unistd.h>
+#include <math.h>
 
 typedef struct  s_vars {
         void    *mlx;
@@ -85,7 +86,20 @@ void	draw_player(t_set *s)
 
 }
 
-void	draw_map(t_set *s)
+void	draw_ray(t_set *s)
+{
+	if (s->mlx->img)
+		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
+	// while (s->map[(int)(s->pl.y / SCALE)][(int)(s->pl.x / SCALE)] != '1')
+	// {
+	// 	s->pl.x += cos(s->pl.dir);
+	// 	s->pl.y += sin(s->pl.dir);
+		my_mlx_pixel_put(s->mlx->win, s->pl.x, s->pl.y, 0x990099);
+	// }
+	(void)s;
+}
+
+int	draw_map(t_set *s)
 {
 	t_point point;
 
@@ -101,20 +115,15 @@ void	draw_map(t_set *s)
 		{
 			if (s->map[point.y][point.x] == '1')
 				img_scale(point, s, 0xFFFFFF);
-			// if (player_ch(s->map[point.y][point.x]))
-			// {
-			// 	s->pl.x = point.x;
-			// 	s->pl.y = point.y;
-			// 	s->pl.pos = s->map[point.y][point.x];
-			// 	img_scale(point, s, 0x0000FF);
-			// }
 			point.x++;
 		}
 		point.y++;
 	}
 	draw_player(s); 
+	// draw_ray(s);
 	mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, s->img->img, 0, 0);
 	// mlx_destroy_image(s->mlx->mlx, s->mlx->img);
+	return (1);
 }
 
 /* 
@@ -129,6 +138,35 @@ a = 0
 d = 2
  */
 
+// int             keypress(int keycode, t_set *s)
+// {
+// 	double coords;
+
+// 	coords = (double)SPEED / 100;
+// 	mlx_clear_window(s->mlx->mlx, s->mlx->win);
+	
+// 	if (keycode == 53)
+// 		exit(0);
+// 	if (keycode == 13 || keycode == 126)	// up
+// 	{
+// 		s->pl.y -= sin(s->pl.dir) * 0.25;
+// 		s->pl.x -= cos(s->pl.dir) * 0.25;
+// 	}
+// 	if (keycode == 1 || keycode == 125)		// down
+// 	{
+// 		s->pl.y += sin(s->pl.dir) * 0.25;
+// 		s->pl.x += cos(s->pl.dir) * 0.25;
+// 	}
+// 	if (keycode == 0 || keycode == 123)		// left
+// 		s->pl.dir -= 0.1;
+// 	if (keycode == 2 || keycode == 124)		//right
+// 		s->pl.dir += 0.1;
+// 	printf("dir:%f, x=%f, y=%f\n", s->pl.dir, s->pl.x, s->pl.y);
+
+// 	draw_map(s);
+// 	return (0);
+// }
+
 int             keypress(int keycode, t_set *s)
 {
 	double coords;
@@ -137,10 +175,7 @@ int             keypress(int keycode, t_set *s)
 	mlx_clear_window(s->mlx->mlx, s->mlx->win);
 	
 	if (keycode == 53)
-	{
-   		mlx_destroy_window(s->mlx->mlx, s->mlx->win);
-		return (0);
-	}
+		exit(0);
 	if (keycode == 13 || keycode == 126)	// up
 		s->pl.up = 1;
 	if (keycode == 1 || keycode == 125)		// down
@@ -149,6 +184,8 @@ int             keypress(int keycode, t_set *s)
 		s->pl.left = 1;
 	if (keycode == 2 || keycode == 124)		//right
 		s->pl.right = 1;
+	// printf("dir:%f, x=%f, y=%f\n", s->pl.dir, s->pl.x, s->pl.y);
+
 	draw_map(s);
 
 	return (0);
@@ -174,6 +211,8 @@ int             keyrelease(int keycode, t_set *s)
 	return (0);
 }
 
+// void	painting()
+
 int			cube_start(t_set *s)
 {
 	t_img img;
@@ -183,15 +222,16 @@ int			cube_start(t_set *s)
 	int i = 0;
 	while (s->map[++i])
 		ft_putendl_fd(s->map[i], 1);
-
 	s->mlx->mlx = mlx_init();
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
 	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 	
-	draw_map(s);
+	// draw_map(s);
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
 	mlx_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
+	// mlx_key_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
+	mlx_loop_hook(s->mlx->mlx, draw_map, s);
 	mlx_loop(s->mlx->mlx);
 
 	return (0);

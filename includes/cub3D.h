@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/03 18:16:40 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 18:28:25 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # define SCALE 15
-# define SPEED 25
+# define SPEED 2.5
 
 # include <stdio.h>
 
@@ -55,10 +55,13 @@ typedef struct s_player
 	double x;
 	double y;
 	char pos;
+	double dir;
 	int up;
 	int down;
 	int left;
 	int right;
+	int start;
+	int end;
 }				t_player;
 
 
@@ -82,7 +85,7 @@ typedef	struct	s_settings
 }				t_set;
 
 int				main(int argc, char **argv);
-int			main_parser(int argc, char *argv, t_set *set);
-int			cube_start(t_set *set);
+int				main_parser(int argc, char *argv, t_set *set);
+int				cube_start(t_set *set);
 
 #endif

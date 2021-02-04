@@ -6,15 +6,9 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/02 12:54:04 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 16:15:24 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int		player_ch (char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}

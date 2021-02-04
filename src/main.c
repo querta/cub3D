@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/03 16:53:19 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:41:04 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int create_structs(int argc, char *argv)
 	if (!main_parser(argc, argv, &set))
 	{
 		printf("owibka karti\n");
-		return (0);
+		exit (0);
 	}
 	// set.map = main_parser(argc, argv, &set, &set.mlist);
 	cube_start(&set);
