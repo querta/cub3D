@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:16:45 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/29 16:04:17 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/05 17:58:44 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "../src/libft/libft.h"
 
 int		get_next_line(int fd, char **line);
-int		player_ch (char c);
+int		check_mapsign(char c);
+int		ft_isspace(char c);
+char	*strstart(char *str);
+
 
 #endif
