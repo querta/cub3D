@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 18:48:50 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/05 19:35:06 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,36 @@ int	check_settings(t_set *set)
 		return (0);
 }
 
+int		check_mapsign(char c)
+{
+	if (c == '0' || c == '1' || c == '2')
+		return (1);
+	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (-1);
+}
+
+/* пофиксить чекер карты. Сделать, чтобы пустые строки не добавлялись в карту
+пофиксить парсинг разрешения на макс значение
+ */
+int check_map(char *str)
+{
+	int i;
+	char *s;
+
+	s = str;
+	i = 0;
+	// if (ft_isspace(*s))
+	// {
+	// 	if (ft)
+	// }
+	while(ft_isspace(*s) && *s)
+		s++;
+	if (check_mapsign(*s))
+		return (1);
+	return (0);
+}
+
 static	int		parse_map(t_set *set, char *line)
 {
 	if (line[0] == 'R' && line[1] == ' ')
@@ -141,7 +171,7 @@ static	int		parse_map(t_set *set, char *line)
 		set->f = strstart(&line[1]);
 	else if (line[0] == 'C' && line[1] == ' ')
 		set->c = strstart(&line[1]);
-	else if (check_mapsign(line[0]))
+	else if (check_map(&line[0]))
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else
 		return (-1);

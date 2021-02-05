@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/01/29 16:02:47 by mmonte           ###   ########.fr        #
+#    Updated: 2021/02/05 19:16:30 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ MLX_FLAGS	= -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 all:	$(SRC_DIR) $(NAME)
 
 $(NAME): $(OBJ) libft mlx
-	@$(CC) $(FLAGS) $(INCLUDES) $(OBJ) $(LFLAGS) -o $(NAME)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJ) $(LFLAGS) -o $(NAME)
 	@printf "\e[1;36mProject \e[1;32m'$(NAME)' \e[1;36mcompiled!\e[0m\n"
 
 %.o : %.c

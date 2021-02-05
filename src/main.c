@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/04 15:41:04 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/05 17:12:04 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int create_structs(int argc, char *argv)
 		exit (0);
 	}
 	// set.map = main_parser(argc, argv, &set, &set.mlist);
+	printf("x:%d\ny:%d\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.size_x, set.size_y, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
+
 	cube_start(&set);
 	return (1);
 }
@@ -48,7 +50,6 @@ int		main(int argc, char **argv)
 	// 	int i = -1;
 	// while (set.map[++i])
 	// 	ft_putendl_fd(map[i], 1);
-	// printf("x:%d\ny:%d\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.size_x, set.size_y, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
 
 	return (0);
 }

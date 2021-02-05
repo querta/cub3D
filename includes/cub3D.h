@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/04 18:28:25 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/05 19:33:37 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 
 # include "../src/libft/libft.h"
 # include "./utils.h"
-# include <mlx.h>
+// # include "./mlx.h"
+# include "../src/minilibx_mms/mlx.h"
 # include <fcntl.h>
+# include <unistd.h>
+# include <math.h>
+
 # define SCALE 15
-# define SPEED 2.5
+# define SPEED 0.025
 
 # include <stdio.h>
 

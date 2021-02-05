@@ -6,14 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/04 20:18:41 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/05 19:35:27 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-#include <unistd.h>
-#include <math.h>
 
 typedef struct  s_vars {
         void    *mlx;
@@ -104,41 +101,84 @@ void	draw_player(t_set *s)
 	}
 }
 
+void coords_increase(t_set *s, double speed)
+{
+	s->pl.y += sin(s->pl.dir) * speed;
+	s->pl.x += cos(s->pl.dir) * speed;	
+}
+
+void coords_decrease(t_set *s, double speed)
+{
+	s->pl.y -= sin(s->pl.dir) * speed;
+	s->pl.x -= cos(s->pl.dir) * speed;	
+}
+
 void	ray_processor(t_set *s)
 {
-	double speed;
-	
-	speed = (double)SPEED / 30;
+	// double speed;
+
+	// speed = (double)SPEED / 100;
 	if (s->pl.up)
 	{
-		s->pl.y -= sin(s->pl.dir) * speed;
-		s->pl.x -= cos(s->pl.dir) * speed;
+		coords_decrease(s, SPEED);
+		if (s->map[(int)s->pl.y][(int)s->pl.x] == '1')
+			coords_increase(s, SPEED);
 	}
 	if (s->pl.down)
 	{
-		s->pl.y += sin(s->pl.dir) * speed;
-		s->pl.x += cos(s->pl.dir) * speed;
+		coords_increase(s, SPEED);
+		if (s->map[(int)s->pl.y][(int)s->pl.x] == '1')
+			coords_decrease(s, SPEED);
 	}
 	if (s->pl.left)
-		s->pl.dir -= 0.05;
+		s->pl.dir -= SPEED;
 	if (s->pl.right)
-		s->pl.dir += 0.05;
+		s->pl.dir += SPEED;
 }
+
+/* сделать отрисовку воронки лучей */
 
 void	draw_ray(t_set *s)
 {
-	t_dpoint end;
-
+	// t_dpoint end;
+	// double x;
+	// double y;
+	t_dpoint ray;
+	double dir;
+	// double start;
+	// double end;
+	
 	if (s->mlx->img)
 		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
-	end.x = s->pl.x * SCALE;
-	end.y = s->pl.y * SCALE;
-	while(s->map[(int)(end.y / SCALE)][(int)(end.x / SCALE)] != '1')
+	// start = s->pl.dir - M_PI_4;
+	// end = s->pl.dir + M_PI_4;
+	ray.x = s->pl.x * SCALE;
+	ray.y = s->pl.y * SCALE;
+	// while (start < end)
+	// {
+		// x = x;
+		// y = y;
+	dir = s->pl.dir + M_PI_4;
+	while(s->map[(int)(ray.y / SCALE)][(int)(ray.x / SCALE)] != '1')
 	{
-		my_mlx_pixel_put(s->img, end.x, end.y, 0x666666);
-		end.x -= cos(s->pl.dir);
-		end.y -= sin(s->pl.dir);
+		my_mlx_pixel_put(s->img, ray.x, ray.y, 0xff0000);
+		// while 
+		// {
+		// 	ray.x -= cos(s->pl.dir) + M_PI_4;
+		// 	ray.y -= sin(s->pl.dir) + M_PI_4;
+		// }
+		ray.x -= cos(s->pl.dir);
+		ray.y -= sin(s->pl.dir);
 	}
+	// x =
+	// while(s->map[(int)(y / SCALE)][(int)(x / SCALE)] != '1')
+	// {
+	// 	my_mlx_pixel_put(s->img, x, y, 0xff0000);
+	// 	x -= cos(s->pl.dir);
+	// 	y -= sin(s->pl.dir);
+	// }
+	// 	start += M_PI_2 / 40;
+	// }
 }
 
 // void	draw_player(t_set *s)	// без углов
@@ -292,9 +332,17 @@ int             keyrelease(int keycode, t_set *s)
 
 // void	painting()
 
+int killit(int i)
+{
+	exit(i);
+}
+
 int			cube_start(t_set *s)
 {
 	t_img img;
+	int max_height;
+	int max_width;
+
 	// t_vars    vars;
 
 	s->img = &img;
@@ -303,16 +351,21 @@ int			cube_start(t_set *s)
 		ft_putendl_fd(s->map[i], 1);
 	s->mlx->mlx = mlx_init();
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
 	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 	
 	// draw_map(s);
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
-	mlx_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
+	mlx_hook(s->mlx->win, 17, 0L, killit, 0);
+	// mlx_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
+	// mlx_key_hook(s->mlx->win, keypress, s);
+	mlx_key_hook(s->mlx->win, keyrelease, s);
 	// mlx_key_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
 	mlx_loop_hook(s->mlx->mlx, draw_map, s);
+	printf("%p\n", s->mlx->win);
+	
 	mlx_loop(s->mlx->mlx);
-
 	return (0);
 }
 
