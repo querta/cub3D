@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 14:43:05 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 15:25:27 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,45 +140,25 @@ void	ray_processor(t_set *s)
 
 void	draw_ray(t_set *s)
 {
-	// t_dpoint end;
-	// double x;
-	// double y;
 	t_dpoint ray;
-	double dir;
-	// double start;
-	// double end;
+	double angle;
 	
+	angle = M_PI_4;
 	if (s->mlx->img)
 		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
-	// start = s->pl.dir - M_PI_4;
-	// end = s->pl.dir + M_PI_4;
-	ray.x = s->pl.x * SCALE;
-	ray.y = s->pl.y * SCALE;
-	// while (start < end)
-	// {
-		// x = x;
-		// y = y;
-	dir = s->pl.dir + M_PI_4;
-	while(s->map[(int)(ray.y / SCALE)][(int)(ray.x / SCALE)] != '1')
+	while (angle >= -M_PI_4)
 	{
-		my_mlx_pixel_put(s->img, ray.x, ray.y, 0xff0000);
-		// while 
-		// {
-		// 	ray.x -= cos(s->pl.dir) + M_PI_4;
-		// 	ray.y -= sin(s->pl.dir) + M_PI_4;
-		// }
-		ray.x -= cos(s->pl.dir);
-		ray.y -= sin(s->pl.dir);
+		ray.x = s->pl.x * SCALE;
+		ray.y = s->pl.y * SCALE;
+		while(s->map[(int)(ray.y / SCALE)][(int)(ray.x / SCALE)] != '1')
+		{
+				my_mlx_pixel_put(s->img, ray.x, ray.y, 0xff0000);
+				ray.x -= cos(s->pl.dir + angle);
+				ray.y -= sin(s->pl.dir + angle);
+		}
+		angle -= 0.001;
 	}
-	// x =
-	// while(s->map[(int)(y / SCALE)][(int)(x / SCALE)] != '1')
-	// {
-	// 	my_mlx_pixel_put(s->img, x, y, 0xff0000);
-	// 	x -= cos(s->pl.dir);
-	// 	y -= sin(s->pl.dir);
-	// }
-	// 	start += M_PI_2 / 40;
-	// }
+
 }
 
 // void	draw_player(t_set *s)	// без углов
@@ -237,11 +217,9 @@ int	draw_map(t_set *s)
 		}
 		point.y++;
 	}
-	// draw_player(s); 
 	ray_processor(s);
-	draw_ray(s);
+	draw_rays(s);
 	mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, s->img->img, 0, 0);
-	// mlx_destroy_image(s->mlx->mlx, s->mlx->img);
 	return (1);
 }
 
@@ -294,7 +272,7 @@ int             keypress(int keycode, t_set *s)
 	mlx_clear_window(s->mlx->mlx, s->mlx->win);
 	
 	if (keycode == 53)
-		exit(0);
+		error(s, 0);
 	if (keycode == 13 || keycode == 126)	// up
 		s->pl.up = 1;
 	if (keycode == 1 || keycode == 125)		// down
@@ -303,8 +281,6 @@ int             keypress(int keycode, t_set *s)
 		s->pl.left = 1;
 	if (keycode == 2 || keycode == 124)		//right
 		s->pl.right = 1;
-	// printf("dir:%f, x=%f, y=%f\n", s->pl.dir, s->pl.x, s->pl.y);
-
 	draw_map(s);
 
 	return (0);
@@ -332,11 +308,14 @@ int             keyrelease(int keycode, t_set *s)
 
 // void	painting()
 
-void	make_window(t_set *s)
+void	create_mlx(t_set *s)
 {
+	t_img img;
 	int max_height;
 	int max_width;
 
+	s->mlx->mlx = mlx_init();
+	s->img = &img;
 	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
 	if (s->size_x > max_width)
 		s->size_x = max_width;
@@ -347,7 +326,6 @@ void	make_window(t_set *s)
 	if (s->size_y < 640)
 		s->size_y = 640;
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
-
 }
 
 int closewin(t_set *s)
@@ -358,29 +336,18 @@ int closewin(t_set *s)
 
 int			cube_start(t_set *s)
 {
-	t_img img;
 
-	// t_vars    vars;
-
-	s->img = &img;
 	int i = 0;
 	write(1, "map\n", 4);
 	while (s->map[++i])
 		ft_putendl_fd(s->map[i], 1);
-	s->mlx->mlx = mlx_init();
-	make_window(s);
-		printf("x:%d\ny:%d\n", s->size_x, s->size_y);
+	create_mlx(s);
+	printf("x:%d\ny:%d\n", s->size_x, s->size_y);
 
-	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
-	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
-	
-	// draw_map(s);
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
 	mlx_hook(s->mlx->win, 17, 0L, closewin, s);
-	// mlx_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
-	// mlx_key_hook(s->mlx->win, keypress, s);
+
 	mlx_key_hook(s->mlx->win, keyrelease, s);
-	// mlx_key_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
 	mlx_loop_hook(s->mlx->mlx, draw_map, s);
 	printf("%p\n", s->mlx->win);
 	
