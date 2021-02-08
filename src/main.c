@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 17:12:04 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 12:59:05 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ int create_structs(int argc, char *argv)
 	set.mlx = &mlx;
 	set.mlist = mlist;
 	// set.map = main_parser(argc, argv, &set);
-	if (!main_parser(argc, argv, &set))
-	{
-		printf("owibka karti\n");
-		exit (0);
-	}
+	main_parser(argc, argv, &set);
 	// set.map = main_parser(argc, argv, &set, &set.mlist);
 	printf("x:%d\ny:%d\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.size_x, set.size_y, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
 

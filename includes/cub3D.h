@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 19:33:37 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 14:37:02 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../src/libft/libft.h"
 # include "./utils.h"
 // # include "./mlx.h"
-# include "../src/minilibx_mms/mlx.h"
+// # include "../src/minilibx_mms/mlx.h"
+# include "mlx.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
@@ -68,6 +69,13 @@ typedef struct s_player
 	int end;
 }				t_player;
 
+typedef enum		e_codes
+{
+	SUCCESS,
+	ER_MAP,
+	ER_SETTINGS,
+	MALLOC
+}					t_codes;
 
 typedef	struct	s_settings
 {
@@ -88,6 +96,7 @@ typedef	struct	s_settings
 	// t_img *img;
 }				t_set;
 
+void error(t_set *s, int code);
 int				main(int argc, char **argv);
 int				main_parser(int argc, char *argv, t_set *set);
 int				cube_start(t_set *set);

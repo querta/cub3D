@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 19:35:06 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 14:31:48 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,19 @@ static void	parse_res(t_set *set, char *par)
 
 	i = 0;
 	par = strstart(par);
-	while(!ft_isspace(par[i]) && set->size_x < 1280)
-		set->size_x = set->size_x * 10 + par[i++] - '0';
-	while (!ft_isspace(par[i]))
-		i++;
-	while(ft_isspace(par[i]))
-		i++;
-	while(par[i] && !ft_isspace(par[i]))
-		set->size_y = set->size_y * 10 + par[i++] - '0';
-	// 7680х4320
-	if (!set->size_x)
-		set->size_x = 640;
-	if (!set->size_y)
-		set->size_y = 640;
-	// mlx_get_screen_size(mlx, &max_width, &max_height)
+	while(!ft_isspace(*par) && i++ < 4 && ft_isdigit(*par))
+		set->size_x = set->size_x * 10 + *par++ - '0';
+	if (!ft_isdigit(*par) && !ft_isspace(*par) && *par)
+		error(set, ER_MAP);
+	while(*par && !ft_isspace(*par))
+		par++;
+	while(*par && ft_isspace(*par))
+		par++;
+	i = 0;
+	if (!*par)
+		error(set, ER_MAP);
+	while(*par && !ft_isspace(*par) && i++ < 4)
+		set->size_y = set->size_y * 10 + *par++ - '0';
 }
 
 int player_fill(t_set *s, char *map, int y, char c)
@@ -92,7 +91,7 @@ int		player_parser(t_set *s)
 
 int		map_checker(t_set *set)
 {
-	if (player_parser(set) == 0)
+	if (!player_parser(set))
 		return (0);
 	return (1);
 }
@@ -129,27 +128,29 @@ int		check_mapsign(char c)
 		return (1);
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
-	return (-1);
+	return (0);
 }
 
-/* пофиксить чекер карты. Сделать, чтобы пустые строки не добавлялись в карту
-пофиксить парсинг разрешения на макс значение
- */
-int check_map(char *str)
+int check_map(char *str, t_set *set)
 {
 	int i;
 	char *s;
 
 	s = str;
 	i = 0;
-	// if (ft_isspace(*s))
-	// {
-	// 	if (ft)
-	// }
-	while(ft_isspace(*s) && *s)
-		s++;
-	if (check_mapsign(*s))
+	if (ft_strchr(s, '0') || ft_strchr(s, '1'))
+	{
+		while(ft_isspace(*s))
+			s++;
+		while (*s)
+		{
+			if (check_mapsign(*s) || ft_isspace(*s))
+				s++;
+			else
+				error(set, ER_MAP);
+		}
 		return (1);
+	}
 	return (0);
 }
 
@@ -158,7 +159,7 @@ static	int		parse_map(t_set *set, char *line)
 	if (line[0] == 'R' && line[1] == ' ')
 		parse_res(set, &line[1]);
 	else if (line[0] == 'N' && line[1] == 'O')
-		set->no = strstart(&line[2]); //&(line[3]);
+		set->no = strstart(&line[2]);
 	else if (line[0] == 'S' && line[1] == 'O')
 		set->so = strstart(&line[2]);
 	else if (line[0] == 'W' && line[1] == 'E')
@@ -171,10 +172,19 @@ static	int		parse_map(t_set *set, char *line)
 		set->f = strstart(&line[1]);
 	else if (line[0] == 'C' && line[1] == ' ')
 		set->c = strstart(&line[1]);
-	else if (check_map(&line[0]))
+	else if (check_map(line, set))
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else
-		return (-1);
+		return (0);
+	return (1);
+}
+
+int checker(t_set *set)
+{
+	if (!map_checker(set))
+		error(set, ER_MAP);
+	if (!check_settings(set))
+		error(set, ER_SETTINGS);
 	return (1);
 }
 
@@ -195,8 +205,7 @@ int			main_parser(int argc, char *argv, t_set *set)
 		parse_map(set, line);
 	parse_map(set, line);
 	set->map = make_map(set, ft_lstsize(set->mlist));
-	if (!map_checker(set) || !check_settings(set))
-		return (0);
+	checker(set);
 	if (argc == 2)
 		close(fd);
 	return (1);

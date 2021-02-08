@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 19:35:27 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 14:43:05 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,32 +332,51 @@ int             keyrelease(int keycode, t_set *s)
 
 // void	painting()
 
-int killit(int i)
+void	make_window(t_set *s)
 {
-	exit(i);
+	int max_height;
+	int max_width;
+
+	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
+	if (s->size_x > max_width)
+		s->size_x = max_width;
+	if (s->size_y > max_height)
+		s->size_y = max_height;
+	if (s->size_x < 640)
+		s->size_x = 640;
+	if (s->size_y < 640)
+		s->size_y = 640;
+	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+
+}
+
+int closewin(t_set *s)
+{
+	error(s, SUCCESS);
+	return (1);
 }
 
 int			cube_start(t_set *s)
 {
 	t_img img;
-	int max_height;
-	int max_width;
 
 	// t_vars    vars;
 
 	s->img = &img;
 	int i = 0;
+	write(1, "map\n", 4);
 	while (s->map[++i])
 		ft_putendl_fd(s->map[i], 1);
 	s->mlx->mlx = mlx_init();
-	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
-	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
+	make_window(s);
+		printf("x:%d\ny:%d\n", s->size_x, s->size_y);
+
 	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 	
 	// draw_map(s);
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
-	mlx_hook(s->mlx->win, 17, 0L, killit, 0);
+	mlx_hook(s->mlx->win, 17, 0L, closewin, s);
 	// mlx_hook(s->mlx->win, 3, 1L<<1, keyrelease, s);
 	// mlx_key_hook(s->mlx->win, keypress, s);
 	mlx_key_hook(s->mlx->win, keyrelease, s);
