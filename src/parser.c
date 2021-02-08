@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 14:31:48 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 16:31:39 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,8 @@ int		player_parser(t_set *s)
 	return (1);
 }
 
-int		map_checker(t_set *set)
-{
-	if (!player_parser(set))
-		return (0);
-	return (1);
-}
 
-
-static	char	**make_map(t_set *s, int size)
+char	**make_map(t_set *s, int size)
 {
 	t_list	*tmp;
 	char	**map;
@@ -181,6 +174,8 @@ static	int		parse_map(t_set *set, char *line)
 
 int checker(t_set *set)
 {
+	if (!player_parser(set))
+		error(set, ER_MAP);
 	if (!map_checker(set))
 		error(set, ER_MAP);
 	if (!check_settings(set))

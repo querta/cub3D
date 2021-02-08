@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 15:37:12 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 15:44:22 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,54 +18,6 @@ void            my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
     dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
     *(unsigned int*)dst = color;
-}
-
-int             keypress(int keycode, t_set *s)
-{
-	double coords;
-
-	coords = (double)SPEED / 100;
-	mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	
-	if (keycode == 53)
-		error(s, 0);
-	if (keycode == 13 || keycode == 126)	// up
-		s->pl.up = 1;
-	if (keycode == 1 || keycode == 125)		// down
-		s->pl.down = 1;
-	if (keycode == 0 || keycode == 123)		// left
-		s->pl.left = 1;
-	if (keycode == 2 || keycode == 124)		//right
-		s->pl.right = 1;
-	draw_map(s);
-
-	return (0);
-}
-
-int             keyrelease(int keycode, t_set *s)
-{
-	double coords;
-
-	coords = (double)SPEED / 100;
-	mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	
-	if (keycode == 13 || keycode == 126)	// up
-		s->pl.up = 0;
-	if (keycode == 1 || keycode == 125)		// down
-		s->pl.down = 0;
-	if (keycode == 0 || keycode == 123)		// left
-		s->pl.left = 0;
-	if (keycode == 2 || keycode == 124)		//right
-		s->pl.right = 0;
-	draw_map(s);
-
-	return (0);
-}
-
-int closewin(t_set *s)
-{
-	error(s, SUCCESS);
-	return (1);
 }
 
 void	create_mlx(t_set *s)

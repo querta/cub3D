@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 15:40:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/08 16:31:43 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,10 @@ typedef	struct	s_settings
 void error(t_set *s, int code);
 int				main(int argc, char **argv);
 int				main_parser(int argc, char *argv, t_set *set);
+int		map_checker(t_set *set);
+char	**make_map(t_set *s, int size);
 int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
-int				closewin(t_set *s);
-int             keyrelease(int keycode, t_set *s);
-int             keypress(int keycode, t_set *s);
 int	draw_map(t_set *s);
 void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
