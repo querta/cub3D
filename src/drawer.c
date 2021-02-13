@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:59 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 15:42:16 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:14:51 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static	void	draw_rays(t_set *s)
 	double angle;
 	
 	angle = M_PI_4;
-	if (s->mlx->img)
-		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
 	while (angle >= -M_PI_4)
 	{
 		ray.x = s->pl.x * SCALE;
@@ -101,9 +99,6 @@ static	void	draw_rays(t_set *s)
 int	draw_map(t_set *s)
 {
 	t_point point;
-
-	if (s->mlx->img)
-		mlx_destroy_image(s->mlx->mlx, s->mlx->img);
 	s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 	ft_bzero(&point, sizeof(t_point));

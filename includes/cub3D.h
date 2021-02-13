@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 16:31:43 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 19:41:42 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_mlx
 {
 	void *mlx;
 	void *win;
-	void *img;
 }				t_mlx;
 
 typedef struct  s_img
@@ -105,6 +104,9 @@ int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
 int	draw_map(t_set *s);
 void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void freearr(char **arr);
+int arrsize(char **arr);
+void	free_img(t_set *s);
 
 
 

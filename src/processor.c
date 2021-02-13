@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 17:00:11 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:15:40 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static	int             keypress(int keycode, t_set *s)
 
 	coords = (double)SPEED / 100;
 	mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	
 	if (keycode == 53)
 		error(s, 0);
 	if (keycode == 13 || keycode == 126)	// up
@@ -41,7 +40,6 @@ static	int             keyrelease(int keycode, t_set *s)
 
 	coords = (double)SPEED / 100;
 	mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	
 	if (keycode == 13 || keycode == 126)	// up
 		s->pl.up = 0;
 	if (keycode == 1 || keycode == 125)		// down
@@ -76,7 +74,8 @@ int			cube_start(t_set *s)
 
 	mlx_key_hook(s->mlx->win, keyrelease, s);
 	mlx_loop_hook(s->mlx->mlx, draw_map, s);
-	printf("%p\n", s->mlx->win);
+	// printf("%p\n", s->mlx->img);
+	printf("%p\n", s->img);
 	
 	mlx_loop(s->mlx->mlx);
 	return (0);

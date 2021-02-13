@@ -6,20 +6,39 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 14:49:20 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:10:58 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+// void freestruct(t_set *s)
+// {
+
+// }
+
+void freearr(char **arr)
+{
+	int i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
 
 static	void		lst_del(void *content)
 {
 	free(content);
 }
 
+
 int exit_free(t_set *s)
 {
+	// if (s->mlx)
+	// 	free(s->mlx);
+	mlx_destroy_image(s->mlx->mlx, s->img->img);
+	printf("mlx:%p\nimg:%p\niim:%p\n", s->mlx, s->img, s->img->img);
 	ft_lstclear(&s->mlist, &lst_del);
+	free(s->map);
 	exit (0);
 }
 
