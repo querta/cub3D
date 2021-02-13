@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:19:50 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 18:11:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 19:24:06 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,48 @@ char **map_copy(t_set *s)
 	return (map);
 }
 
-//  Заливка (элемент, заменяемый цвет, цвет заливки):
-//  1. Если цвет элемента не заменяемый цвет, возврат.
-//  2. Установить цвет элемента в цвет заливки.
-//  3. Заливка (шаг на запад от элемента, заменяемый цвет, цвет заливки).
-//     Заливка (шаг на восток от элемента, заменяемый цвет, цвет заливки).
-//     Заливка (шаг на север от элемента, заменяемый цвет, цвет заливки).
-//     Заливка (шаг на юг от элемента, заменяемый цвет, цвет заливки).
-//     {для связности по 8 направлениям - ещё четыре вызова по диагоналям}
-//  4. Возврат.
-
-// @todo: как-то надо фиксануть, чтобы не рисовало когда есть дырка в стене
-static int changecolor(char **map, int y, int x)
+int checkpoint(char **map, int y, int x)
 {
-	if (map[y][x] != '0')
-		return (1);
-	map[y][x] = 'x';
-	changecolor(map, y, x - 1);
-	changecolor(map, y, x + 1);
-	changecolor(map, y - 1, x);
-	changecolor(map, y + 1, x);
-	// changecolor(map, y - 1, x - 1);
-	// changecolor(map, y - 1, x + 1);
-	// changecolor(map, y + 1, x - 1);
-	// changecolor(map, y + 1, x + 1);
+	int len;
+
+	len = 0;
+	while (map[len])
+		len++;
+	if(x == (int)ft_strlen(map[y]) - 1)
+		return (0);
+	if(x == 0)
+		return (0);
+	if (y == 0)
+		return (0);
+	if (y == len -1)
+		return (0);
 	return (1);
 }
 
+static int mapfiller(char **map, int y, int x)
+{
+	if (map[y][x] != '0')
+		return (0);
+	if (map[y][x] == '0')
+		map[y][x] = 'x';
+	if (x > 0)
+		mapfiller(map, y, x - 1);
+	if (x < (int)ft_strlen(map[y]))
+		mapfiller(map, y, x + 1);
+	if (y > 0)
+		mapfiller(map, y - 1, x);
+	if (y < arrsize(map) - 1)
+		mapfiller(map, y + 1, x);
+	if (y < arrsize(map) - 1 && x < (int)ft_strlen(map[y]))
+		mapfiller(map, y + 1, x + 1);
+	if (x > 0 && y > 0)
+		mapfiller(map, y - 1, x - 1);
+	if (y > 0 && x < (int)ft_strlen(map[y]))
+		mapfiller(map, y - 1, x + 1);
+	if (x > 0 && y < arrsize(map) - 1)
+		mapfiller(map, y + 1, x - 1);
+	return (1);
+}
 
 // static void changecolor(char **map, int y, int x)
 // {
@@ -67,15 +82,16 @@ static int changecolor(char **map, int y, int x)
 // 	size = 0;
 // 	while (map[size])
 // 		size++;
-// 	char p = map[y][x];
-// 	map[y][x] = 'x';
-// 	// if (y > 0 && map[y -1][x] == p)
-// 	// 	changecolor(map, y - 1, x);
-// 	// if((y + 1 < size - 1) && map[y+1][x] == p)
-// 	// 	changecolor(map, y + 1, y);
-// 	if (x > 0 && map[y][x - 1] == p)
+// 	// char p = '0';
+// 	if (map[y][x] == '0')
+// 		map[y][x] = 'x';
+// 	if (y > 0)
+// 		changecolor(map, y - 1, x);
+// 	if((y + 1 < size - 1))
+// 		changecolor(map, y + 1, y);
+// 	if (x > 0)
 // 		changecolor(map, y, x - 1);
-// 	if (x + 1 < (int)ft_strlen(map[y]) && map[y][x + 1] == p)
+// 	if (x + 1 < ((int)ft_strlen(map[y]) - 1))
 // 		changecolor(map, y, x + 1);
 // 	// changecolor(map, y - 1, x - 1);
 // 	// changecolor(map, y - 1, x + 1);
@@ -83,6 +99,30 @@ static int changecolor(char **map, int y, int x)
 // 	// changecolor(map, y + 1, x + 1);
 // 	// return (1);
 // }
+
+int checkborders(char **map)
+{
+	int i;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (map[i])
+	{
+		k = 0;
+		while (map[i][k])
+		{
+			if (map[i][k] == 'x')
+			{
+				if (checkpoint(map, i, k) == 0)
+					return (0);
+			}
+			k++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 int		map_checker(t_set *s)
 {
@@ -94,15 +134,18 @@ int		map_checker(t_set *s)
 	i = -1;
 	x = 0;
 	y = 0;
-	// map = make_map(s, ft_lstsize(s->mlist));
+
 	map = map_copy(s);
 	map[(int)s->pl.y][(int)s->pl.x] = '0';
-	// changecolor(map, (int)s->pl.y, (int)s->pl.x);
-	changecolor(map, (int)s->pl.y, (int)s->pl.x);
+	mapfiller(map, (int)s->pl.y, (int)s->pl.x);
+	if (!checkborders(map))
+	{
+		freearr(map);
+		return (0);
+	}
 	while (map[++i])
 		ft_putendl_fd(map[i], 1);
-	// paint(map[])
-
+	freearr(map);
 	return (1);
 }
 
