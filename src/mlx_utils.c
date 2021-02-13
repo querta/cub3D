@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/13 20:11:18 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:40:21 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	create_mlx(t_set *s)
 	int max_height;
 	int max_width;
 
+	// ft_bzero(&img, sizeof(img));
 	s->mlx->mlx = mlx_init();
 	s->img = &img;
 	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
@@ -38,4 +39,7 @@ void	create_mlx(t_set *s)
 	if (s->size_y < 640)
 		s->size_y = 640;
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+
+	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
+	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 }

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/13 20:10:58 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:40:10 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int exit_free(t_set *s)
 {
 	// if (s->mlx)
 	// 	free(s->mlx);
-	mlx_destroy_image(s->mlx->mlx, s->img->img);
+	// if (s->img->img)
+		// mlx_destroy_image(s->mlx->mlx, s->img->img);
 	printf("mlx:%p\nimg:%p\niim:%p\n", s->mlx, s->img, s->img->img);
 	ft_lstclear(&s->mlist, &lst_del);
 	free(s->map);
