@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/13 19:41:42 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:46:49 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,18 @@ typedef	struct	s_settings
 	t_mlx *mlx;
 	t_list *mlist;
 	t_img *img;
-	// t_img *img;
 }				t_set;
 
 void error(t_set *s, int code);
 int				main(int argc, char **argv);
 int				main_parser(int argc, char *argv, t_set *set);
-int		map_checker(t_set *set);
-char	**make_map(t_set *s, int size);
+int		parse_mapfile(t_set *set, char *line);
+int		parse_player(t_set *s);
+int				checker(t_set *set);
+int		checker_map(t_set *s);
+int				checker_filler_map(t_set *s, char **map);
+
+// char	**make_map(t_set *s, int size);
 int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
 int	draw_map(t_set *s);

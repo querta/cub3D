@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:16:45 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/05 19:14:29 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:16:03 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 int		get_next_line(int fd, char **line);
 int		ft_isspace(char c);
-char	*strstart(char *str);
 
 
 #endif

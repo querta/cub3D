@@ -1,47 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:18:37 by mmonte           ###   ########.fr       */
+/*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
+/*   Updated: 2021/02/15 18:40:18 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int ft_isspace(char c)
+static	int	check_settings(t_set *set)
 {
-	if (c == '\t' || c == '\n')
+	if (set->no && set->so && set->we && set->ea && set->s && set->f && set->c)
 		return (1);
-	if (c == '\v' || c == '\f')
-		return (1);
-	if (c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
-
-char	*strstart(char *str)
-{
-	char *c;
-
-	c = str;
-	if (!ft_isspace(*c))
+	else
 		return (0);
-	while (ft_isspace(*c))
-		c++;
-	return(c);
 }
 
-
-int arrsize(char **arr)
+int checker(t_set *set)
 {
-	int size;
-
-	size = 0;
-	while (arr[size])
-		size++;
-	return (size);
+	if (!parse_player(set))
+		error(set, ER_MAP);
+	if (!checker_map(set))
+		error(set, ER_MAP);
+	if (!check_settings(set))
+		error(set, ER_SETTINGS);
+	return (1);
 }

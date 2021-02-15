@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/13 19:32:14 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:53:21 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int create_structs(int argc, char *argv)
 	main_parser(argc, argv, &set);
 	// set.map = main_parser(argc, argv, &set, &set.mlist);
 	printf("x:%d\ny:%d\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.size_x, set.size_y, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
-
 	cube_start(&set);
+
+	
 	return (1);
 }
 

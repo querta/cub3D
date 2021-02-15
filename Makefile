@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/02/08 16:20:12 by mmonte           ###   ########.fr        #
+#    Updated: 2021/02/15 18:47:02 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,12 @@ SRC_DIR = src/
 LIBFT_DIR = $(SRC_DIR)libft/
 MLX_DIR = $(SRC_DIR)minilibx_mms/
 
-SRC = get_next_line.c main.c parser.c processor.c utils.c errors.c mlx_utils.c drawer.c map_checker.c
+SRC = get_next_line.c \
+	main.c \
+	parser.c parse_mapfile.c parse_player.c \
+	processor.c \
+	checker.c checker_filler_map.c checker_map.c \
+	utils.c errors.c mlx_utils.c drawer.c
 
 OBJ =	$(addprefix $(SRC_DIR), $(SRC:.c=.o)) 
 
