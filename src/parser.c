@@ -6,20 +6,23 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/08 16:31:39 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:15:13 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	parse_res(t_set *set, char *par)
+static void	parse_res(t_set *set, char *parstr)
 {
 	int i;
 	set->size_x = 0;
 	set->size_y = 0;
+	char *par;
 
 	i = 0;
-	par = strstart(par);
+	par = parstr;
+	while (ft_isspace(*par))
+		par++;
 	while(!ft_isspace(*par) && i++ < 4 && ft_isdigit(*par))
 		set->size_x = set->size_x * 10 + *par++ - '0';
 	if (!ft_isdigit(*par) && !ft_isspace(*par) && *par)
@@ -147,24 +150,26 @@ int check_map(char *str, t_set *set)
 	return (0);
 }
 
+
+
 static	int		parse_map(t_set *set, char *line)
 {
 	if (line[0] == 'R' && line[1] == ' ')
 		parse_res(set, &line[1]);
 	else if (line[0] == 'N' && line[1] == 'O')
-		set->no = strstart(&line[2]);
+		set->no = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'S' && line[1] == 'O')
-		set->so = strstart(&line[2]);
+		set->so = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'W' && line[1] == 'E')
-		set->we = strstart(&line[2]);
+		set->we = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'E' && line[1] == 'A')
-		set->ea = strstart(&line[2]);
+		set->ea = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'S' && line[1] == ' ')
-		set->s = strstart(&line[1]);
+		set->s = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'F' && line[1] == ' ')
-		set->f = strstart(&line[1]);
+		set->f = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'C' && line[1] == ' ')
-		set->c = strstart(&line[1]);
+		set->c = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (check_map(line, set))
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else
@@ -198,7 +203,8 @@ int			main_parser(int argc, char *argv, t_set *set)
 		return (0);
 	while (get_next_line(fd, &line))
 		parse_map(set, line);
-	parse_map(set, line);
+	if (!parse_map(set, line))
+		error(set, ER_SETTINGS);
 	set->map = make_map(set, ft_lstsize(set->mlist));
 	checker(set);
 	if (argc == 2)
