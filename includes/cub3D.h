@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:46:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:52:21 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
 int	draw_map(t_set *s);
 void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void freearr(char **arr);
-int arrsize(char **arr);
 void	free_img(t_set *s);
 
 

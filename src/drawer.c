@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:59 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/13 20:39:46 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:55:59 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,6 @@ static	void coords_change(t_set *s, char c, double speed)
 		s->pl.x -= cos(s->pl.dir) * speed;	
 	}
 }
-
-// static	void coords_increase(t_set *s, double speed)
-// {
-// 	s->pl.y += sin(s->pl.dir) * speed;
-// 	s->pl.x += cos(s->pl.dir) * speed;	
-// }
-
-// static	void coords_decrease(t_set *s, double speed)
-// {
-// 	s->pl.y -= sin(s->pl.dir) * speed;
-// 	s->pl.x -= cos(s->pl.dir) * speed;	
-// }
 
 static	void	ray_processor(t_set *s)
 {

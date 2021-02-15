@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:18:37 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:52:25 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,6 @@ int ft_isspace(char c)
 	return (0);
 }
 
-char	*strstart(char *str)
-{
-	char *c;
-
-	c = str;
-	if (!ft_isspace(*c))
-		return (0);
-	while (ft_isspace(*c))
-		c++;
-	return(c);
-}
-
-
 int arrsize(char **arr)
 {
 	int size;
@@ -44,4 +31,12 @@ int arrsize(char **arr)
 	while (arr[size])
 		size++;
 	return (size);
+}
+
+void freearr(char **arr)
+{
+	int i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }
