@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:50:06 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:43:49 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	create_mlx(t_set *s)
 	s->size_y = (s->size_x < 640) ? 640 : s->size_y;
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
 
+	// s->img->img = mlx_new_image(s->mlx->mlx, 640, 640);
 	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
 	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
+	printf("s->img:%p s->img->img:%p\n", s->img, s->img->img);
 }

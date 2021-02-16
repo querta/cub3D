@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:55:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:45:11 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static	int exit_free(t_set *s)
 	// 	mlx_destroy_image(s->mlx->mlx, s->img->img);
 	if (s->mlx->win)
 		mlx_destroy_window(s->mlx->mlx, s->mlx->win);
+	if(s->img->img)
+		mlx_destroy_image(s->mlx->mlx, s->img->img);
 	ft_lstclear(&s->mlist, &lst_del);
 	freestruct(s);
 	free(s->map);

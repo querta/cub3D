@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/02/15 18:59:13 by mmonte           ###   ########.fr        #
+#    Updated: 2021/02/16 17:09:32 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRC = get_next_line.c \
 	parser/parser.c parser/parse_mapfile.c parser/parse_player.c \
 	processor.c \
 	checker/checker.c checker/checker_filler_map.c checker/checker_map.c \
-	utils.c errors.c mlx_utils.c drawer.c
+	utils.c errors.c mlx_utils.c drawer.c 
+
+## draw_map2d.c
 
 OBJ =	$(addprefix $(SRC_DIR), $(SRC:.c=.o)) 
 

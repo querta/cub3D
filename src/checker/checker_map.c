@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:19:50 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:55:45 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:46:17 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ int		checker_map(t_set *s)
 	map[(int)s->pl.y][(int)s->pl.x] = '0';
 	if(!checker_filler_map(s, map))
 	{
-		freearr(map);
+		if (map)
+			freearr(map);
 		return (0);
 	}
 	while (map[++i])
 		ft_putendl_fd(map[i], 1);
-	freearr(map);
+	if (map)
+		freearr(map);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:52:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/16 18:22:13 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ typedef struct s_player
 {
 	double x;
 	double y;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
 	char pos;
 	double dir;
 	int up;
@@ -95,6 +99,7 @@ typedef	struct	s_settings
 }				t_set;
 
 void error(t_set *s, int code);
+void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int				main(int argc, char **argv);
 int				main_parser(int argc, char *argv, t_set *set);
 int		parse_mapfile(t_set *set, char *line);
@@ -106,8 +111,8 @@ int				checker_filler_map(t_set *s, char **map);
 // char	**make_map(t_set *s, int size);
 int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
-int	draw_map(t_set *s);
-void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
+// int	draw_map(t_set *s);
+int		draw_main(t_set *s);
 void	free_img(t_set *s);
 
 
