@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   parse_mapfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:45:31 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 17:00:47 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	parse_res(t_set *set, char *parstr)
 	par = parstr;
 	while (ft_isspace(*par))
 		par++;
-	while(!ft_isspace(*par) && i++ < 4 && ft_isdigit(*par))
+	while(!ft_isspace(*par) && ft_isdigit(*par) && i++ < 4)
 		set->size_x = set->size_x * 10 + *par++ - '0';
-	if (!ft_isdigit(*par) && !ft_isspace(*par) && *par)
+	while (!ft_isspace(*par))
+		par++;
+	while (ft_isspace(*par))
+		par++;
+	if (!ft_isdigit(*par) || !par)
 		error(set, ER_MAP);
-	while(*par && !ft_isspace(*par))
-		par++;
-	while(*par && ft_isspace(*par))
-		par++;
 	i = 0;
 	if (!*par)
 		error(set, ER_MAP);

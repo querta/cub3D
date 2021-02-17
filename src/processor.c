@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/16 18:42:53 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 21:03:49 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int			cube_start(t_set *s)
 
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
 	mlx_hook(s->mlx->win, 17, 0L, closewin, s);
-	mlx_key_hook(s->mlx->win, keyrelease, s);
 
 	// mlx_loop_hook(s->mlx->mlx, draw_map, s);
 	mlx_loop_hook(s->mlx->mlx, draw_main, s);
 	printf("%p\n", s->img);
-	
+	mlx_key_hook(s->mlx->win, keyrelease, s);
+
 	// draw_main(s);
 	mlx_loop(s->mlx->mlx);
 	return (0);

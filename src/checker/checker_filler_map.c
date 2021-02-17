@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:43:20 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 14:17:59 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ static int check_filled_point(char **map, int y, int x)
 	len = 0;
 	while (map[len])
 		len++;
-	printf("x=%d, y=%d, len=%d\n", x, y, len);
 	if (y < len -1 && y > 0)
 	{
-		printf("x=%d, y=%d\n", x, y);
 		if (x < (int)ft_strlen(map[y]) && x > 0)
 		{
-			printf("tut x=%d, y=%d\n", x, y);
 			if (check_corner(map, y, x))
 				return (1);
 		}

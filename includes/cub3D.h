@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/16 18:22:13 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 18:24:00 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <math.h>
 
 # define SCALE 15
-# define SPEED 0.03
+# define SPEED 0.05
 
 # include <stdio.h>
 
@@ -54,6 +54,22 @@ typedef struct s_dpoint
 	double y;
 }			t_dpoint;
 
+typedef struct s_ray
+{
+	double dirX;
+	double dirY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double cameraX;
+	double cameraY;
+	double wall;
+	int stepX;
+	int stepY;
+	int side;
+}			t_ray;
+
 typedef struct s_player
 {
 	double x;
@@ -68,8 +84,7 @@ typedef struct s_player
 	int down;
 	int left;
 	int right;
-	int start;
-	int end;
+
 }				t_player;
 
 typedef enum		e_codes
@@ -96,6 +111,7 @@ typedef	struct	s_settings
 	t_mlx *mlx;
 	t_list *mlist;
 	t_img *img;
+	t_ray *ray;
 }				t_set;
 
 void error(t_set *s, int code);
@@ -113,6 +129,7 @@ int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
 // int	draw_map(t_set *s);
 int		draw_main(t_set *s);
+void	moveplayer(t_set *s);
 void	free_img(t_set *s);
 
 

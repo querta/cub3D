@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/16 18:43:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 17:02:08 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	create_mlx(t_set *s)
 	s->img = &img;
 	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
 	s->size_x = (s->size_x > max_width) ? max_width : s->size_x;
-	s->size_y = (s->size_x > max_height) ? max_height : s->size_y;
+	s->size_y = (s->size_y > max_height) ? max_height : s->size_y;
 	s->size_x = (s->size_x < 640) ? 640 : s->size_x;
-	s->size_y = (s->size_x < 640) ? 640 : s->size_y;
+	s->size_y = (s->size_y < 640) ? 640 : s->size_y;
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
 
 	// s->img->img = mlx_new_image(s->mlx->mlx, 640, 640);

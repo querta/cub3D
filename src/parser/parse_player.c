@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:38:20 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/16 15:41:25 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/17 16:13:31 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	int player_fill(t_set *s, char *map, int y, char c)
 				s->pl.dirX = 1; 
 				s->pl.dirY = 0;
 				s->pl.planeX = 0;
-				s->pl.planeY = -0.66;
+				s->pl.planeY = 0.66;
 				s->pl.dir = M_PI; // 3.1416; // 180
 			}
 			if (c == 'W')
@@ -53,9 +53,12 @@ static	int player_fill(t_set *s, char *map, int y, char c)
 				s->pl.dirX = -1; 
 				s->pl.dirY = 0;
 				s->pl.planeX = 0;
-				s->pl.planeY = 0.66;
+				s->pl.planeY = -0.66;
 				s->pl.dir = 0;
 			}
+			s->pl.x += 0.1;
+			s->pl.y += 0.1;
+
 		}
 		else
 			return (0);
