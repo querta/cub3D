@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 18:55:51 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 12:25:59 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static	int	check_settings(t_set *set)
 {
-	if (set->no && set->so && set->we && set->ea && set->s && set->f && set->c)
+	if (set->no.path && set->so.path && set->we.path && set->ea.path)
+		return (1);
+	else if (set->s && set->f && set->c)
 		return (1);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/17 21:03:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:41:00 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static	int             keypress(int keycode, t_set *s)
 	double coords;
 
 	coords = (double)SPEED / 100;
-	// mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	// mlx_destroy_image(s->mlx->mlx, s->img->img);
 	if (keycode == 53)
 		error(s, 0);
 	if (keycode == 13 || keycode == 126)	// up
@@ -30,7 +28,6 @@ static	int             keypress(int keycode, t_set *s)
 		s->pl.left = 1;
 	if (keycode == 2 || keycode == 124)		//right
 		s->pl.right = 1;
-	// draw_map(s);
 	draw_main(s);
 
 	return (0);
@@ -40,9 +37,7 @@ static	int             keyrelease(int keycode, t_set *s)
 {
 	double coords;
 
-	coords = (double)SPEED / 100;
-	// mlx_clear_window(s->mlx->mlx, s->mlx->win);
-	// mlx_destroy_image(s->mlx->mlx, s->img->img);
+	coords = (double)SPEED / 100;;
 	if (keycode == 13 || keycode == 126)	// up
 		s->pl.up = 0;
 	if (keycode == 1 || keycode == 125)		// down
@@ -51,7 +46,6 @@ static	int             keyrelease(int keycode, t_set *s)
 		s->pl.left = 0;
 	if (keycode == 2 || keycode == 124)		//right
 		s->pl.right = 0;
-	// draw_map(s);
 	draw_main(s);
 
 	return (0);
@@ -76,12 +70,10 @@ int			cube_start(t_set *s)
 	mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
 	mlx_hook(s->mlx->win, 17, 0L, closewin, s);
 
-	// mlx_loop_hook(s->mlx->mlx, draw_map, s);
 	mlx_loop_hook(s->mlx->mlx, draw_main, s);
 	printf("%p\n", s->img);
 	mlx_key_hook(s->mlx->win, keyrelease, s);
 
-	// draw_main(s);
 	mlx_loop(s->mlx->mlx);
 	return (0);
 }

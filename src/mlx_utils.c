@@ -6,27 +6,61 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/17 17:02:08 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 13:32:14 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void            my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
-    char    *dst;
+	char	*dst;
 
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	image_refresh(t_set *s)
+{
+	// int	img_width = 64;
+	// int	img_height = 64;
+
+	if (s->img->img)
+		mlx_destroy_image(s->mlx->mlx, s->img->img);
+	s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
+	s->img->addr = mlx_get_data_addr(s->img->img,
+			&s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
+	// s->img->img = mlx_xpm_file_to_image(s->mlx->mlx, "../textures/wood.xpm", &img_width, &img_height);
+
+}
+
+void create_teximg(t_set *s, t_tex *tex, t_img *img)
+{
+	tex->img = img;
+	if (!(tex->img->img = mlx_xpm_file_to_image(s->mlx->mlx, tex->path, &tex->wi, &tex->he)))
+		error(s, ER_TEXTURE);
+	tex->img->addr = mlx_get_data_addr(tex->img->img, &tex->img->bits_per_pixel, &tex->img->line_length, &tex->img->endian);
+}
+
+void	create_textures(t_set *s)
+{
+	t_img no;
+	t_img so;
+	t_img we;
+	t_img ea;
+
+	create_teximg(s, &s->no, &no);
+	create_teximg(s, &s->so, &so);
+	create_teximg(s, &s->we, &we);
+	create_teximg(s, &s->ea, &ea);
 }
 
 void	create_mlx(t_set *s)
 {
-	t_img img;
-	int max_height;
-	int max_width;
+	t_img	img;
+	int		max_height;
+	int		max_width;
 
-	// ft_bzero(&img, sizeof(img));
 	s->mlx->mlx = mlx_init();
 	s->img = &img;
 	mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
@@ -35,9 +69,5 @@ void	create_mlx(t_set *s)
 	s->size_x = (s->size_x < 640) ? 640 : s->size_x;
 	s->size_y = (s->size_y < 640) ? 640 : s->size_y;
 	s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
-
-	// s->img->img = mlx_new_image(s->mlx->mlx, 640, 640);
-	// s->img->img = mlx_new_image(s->mlx->mlx, s->size_x, s->size_y);
-	// s->img->addr = mlx_get_data_addr(s->img->img, &s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
-	printf("s->img:%p s->img->img:%p\n", s->img, s->img->img);
+	create_textures(s);
 }

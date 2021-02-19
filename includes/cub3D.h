@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/17 18:24:00 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 13:18:44 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,26 @@ typedef struct s_mlx
 
 typedef struct  s_img
 {
-    void        *img;
+	void        *img;
     char        *addr;
     int         bits_per_pixel;
     int         line_length;
     int         endian;
 }               t_img;
+
+typedef struct s_tex
+{
+	t_img *img;
+	char *path;
+	int wi;
+	int he;
+	double wallx;
+	double step;
+	double pos;
+	int x;
+	int y;
+}				t_tex;
+
 
 typedef struct s_point
 {
@@ -92,6 +106,7 @@ typedef enum		e_codes
 	SUCCESS,
 	ER_MAP,
 	ER_SETTINGS,
+	ER_TEXTURE,
 	MALLOC
 }					t_codes;
 
@@ -99,10 +114,10 @@ typedef	struct	s_settings
 {
 	int size_x;
 	int size_y;
-	char *no;
-	char *so;
-	char *we;
-	char *ea;
+	t_tex no;
+	t_tex so;
+	t_tex we;
+	t_tex ea;
 	char *s;
 	char *f;
 	char *c;
@@ -127,8 +142,10 @@ int				checker_filler_map(t_set *s, char **map);
 // char	**make_map(t_set *s, int size);
 int				cube_start(t_set *set);
 void			create_mlx(t_set *s);
+void		image_refresh(t_set *s);
 // int	draw_map(t_set *s);
 int		draw_main(t_set *s);
+void	draw_all(t_set *s, int x);
 void	moveplayer(t_set *s);
 void	free_img(t_set *s);
 

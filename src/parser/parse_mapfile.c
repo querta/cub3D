@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/17 17:00:47 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 12:27:28 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,19 @@ static	int validate_map_line(char *str, t_set *set)
 }
 
 
+
 int		parse_mapfile(t_set *set, char *line)
 {
 	if (line[0] == 'R' && line[1] == ' ')
 		parse_res(set, &line[1]);
 	else if (line[0] == 'N' && line[1] == 'O')
-		set->no = ft_strtrim(&line[2], " \n\t\v\f\r");
+		set->no.path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'S' && line[1] == 'O')
-		set->so = ft_strtrim(&line[2], " \n\t\v\f\r");
+		set->so.path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'W' && line[1] == 'E')
-		set->we = ft_strtrim(&line[2], " \n\t\v\f\r");
+		set->we.path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'E' && line[1] == 'A')
-		set->ea = ft_strtrim(&line[2], " \n\t\v\f\r");
+		set->ea.path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'S' && line[1] == ' ')
 		set->s = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'F' && line[1] == ' ')

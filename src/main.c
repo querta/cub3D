@@ -6,11 +6,28 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/15 14:53:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 12:34:34 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void textures_init(t_set *set)
+{
+	t_tex no;
+	t_tex so;
+	t_tex we;
+	t_tex ea;
+
+	ft_bzero(&no, sizeof(no));
+	ft_bzero(&so, sizeof(so));
+	ft_bzero(&we, sizeof(we));
+	ft_bzero(&ea, sizeof(ea));
+	set->no = no;
+	set->so = so;
+	set->we = we;
+	set->ea = ea;
+}
 
 int create_structs(int argc, char *argv)
 {
@@ -18,8 +35,6 @@ int create_structs(int argc, char *argv)
 	t_set	set;
 	t_mlx	mlx;
 	t_player player;
-	// char	**map;
-
 	
 	ft_bzero(&set, sizeof(set));
 	ft_bzero(&mlx, sizeof(mlx));
@@ -27,10 +42,9 @@ int create_structs(int argc, char *argv)
 	ft_bzero(&player, sizeof(player));
 	set.mlx = &mlx;
 	set.mlist = mlist;
-	// set.map = main_parser(argc, argv, &set);
+	textures_init(&set);
+
 	main_parser(argc, argv, &set);
-	// set.map = main_parser(argc, argv, &set, &set.mlist);
-	printf("x:%d\ny:%d\nno:%s\nso:%s\nwe:%s\nea:%s\ns:%s\nf:%s\nc:%s\n", set.size_x, set.size_y, set.no, set.so, set.we, set.ea, set.s, set.f, set.c );
 	cube_start(&set);
 
 	
