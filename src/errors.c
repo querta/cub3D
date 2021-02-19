@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 20:05:07 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 22:43:14 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static	int exit_free(t_set *s)
 	ft_lstclear(&s->mlist, &lst_del);
 	freestruct(s);
 	free(s->map);
+	free(s);
 	exit (0);
 }
 

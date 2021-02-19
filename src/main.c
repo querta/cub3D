@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 20:43:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 22:22:56 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,27 @@
 
 int create_structs(int argc, char *argv)
 {
-	t_set	set;
+	t_set	*set;
 	t_list	*mlist;
 	t_mlx	mlx;
 	t_player player;
 	
-	ft_bzero(&set, sizeof(set));
+	// ft_bzero(&set, sizeof(set));
+	set = (t_set *)malloc(sizeof(t_set));
 	ft_bzero(&mlx, sizeof(mlx));
 	ft_bzero(&mlist, sizeof(mlist));
 	ft_bzero(&player, sizeof(player));
-	set.tex = (t_tex *)malloc(sizeof(t_tex));
-	set.tex->no = (t_img *)malloc(sizeof(t_img));
-	set.tex->so = (t_img *)malloc(sizeof(t_img));
-	set.tex->we = (t_img *)malloc(sizeof(t_img));
-	set.tex->ea = (t_img *)malloc(sizeof(t_img));
-	set.mlx = &mlx;
-	set.mlist = mlist;
-	set.save = argc - 2;
+	set->tex = (t_tex *)malloc(sizeof(t_tex));
+	set->tex->no = (t_img *)malloc(sizeof(t_img));
+	set->tex->so = (t_img *)malloc(sizeof(t_img));
+	set->tex->we = (t_img *)malloc(sizeof(t_img));
+	set->tex->ea = (t_img *)malloc(sizeof(t_img));
+	set->mlx = &mlx;
+	set->mlist = mlist;
+	set->save = argc - 2;
 
-	main_parser(argv, &set);
-	cube_start(&set);
+	main_parser(argv, set);
+	cube_start(set);
 
 	
 	return (1);

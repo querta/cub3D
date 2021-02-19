@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 21:21:04 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 22:17:50 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,7 @@ void	create_mlx(t_set *s)
 
 	s->mlx->mlx = mlx_init();
 	s->img = &img;
-	if (s->save)
-	{
-		s->size_x = 640;
-		s->size_y = 640;
-	}
-	else
+	if (!s->save)
 	{
 		mlx_get_screen_size(s->mlx->mlx, &max_width, &max_height);
 		s->size_x = (s->size_x > max_width) ? max_width : s->size_x;
@@ -67,6 +62,12 @@ void	create_mlx(t_set *s)
 		s->size_x = (s->size_x < 640) ? 640 : s->size_x;
 		s->size_y = (s->size_y < 640) ? 640 : s->size_y;
 		s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+	}
+	else if (s->save)
+	{
+		s->size_x = 640;
+		s->size_y = 640;
+		printf("createmlx\nsize_x=%d, size_y=%d\n", s->size_x, s->size_y);
 	}
 	create_textures(s);
 }

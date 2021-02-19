@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 21:52:07 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 22:34:49 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,6 @@ static	int closewin(t_set *s)
 	return (1);
 }
 
-void save_screen(t_set *s)
-{
-	printf("savescreen∂\n");
-	// printf("img - %p\n", s->img->img);
-	raycaster(s);
-	printf("%p\n", s->img->img);
-}
-
 int			cube_start(t_set *s)
 {
 	// int i = -1;
@@ -96,6 +88,6 @@ int			cube_start(t_set *s)
 		mlx_loop(s->mlx->mlx);
 	}
 	else
-		save_screen(s);
+		raycaster(s);
 	return (0);
 }

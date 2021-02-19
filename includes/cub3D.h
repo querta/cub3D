@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 20:44:04 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 22:41:46 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef enum		e_codes
 	ER_MAP,
 	ER_SETTINGS,
 	ER_TEXTURE,
+	ER_SCREEN,
 	MALLOC
 }					t_codes;
 
@@ -154,6 +155,7 @@ int				raycaster(t_set *s);
 void	draw_all(t_set *s, int x);
 void	moveplayer(t_set *s);
 void	free_img(t_set *s);
+void	save_screenshot(t_set *s);
 
 
 

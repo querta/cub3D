@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/02/19 19:22:54 by mmonte           ###   ########.fr        #
+#    Updated: 2021/02/19 22:41:37 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,11 @@ SRC = get_next_line.c \
 	processor.c \
 	checker/checker.c checker/checker_filler_map.c checker/checker_map.c \
 	utils.c errors.c mlx_utils.c raycaster.c draw_all.c \
-	movements.c
+	movements.c save_screenshot.c
 
 ## draw_map2d.c
 
 OBJ =	$(addprefix $(SRC_DIR), $(SRC:.c=.o)) 
-
-# gcc -l links with a library file.
-# gcc -L looks in directory for library files.
 
 INCLUDES		= -I $(HEADER) -I $(LIBFT_DIR) -I $(MLX_DIR)
 LFLAGS	= -L $(LIBFT_DIR) -lft $(MLX_FLAGS) -lm
