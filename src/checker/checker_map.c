@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:19:50 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 13:35:24 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 20:05:54 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ static	char **map_copy(t_set *s)
 int		checker_map(t_set *s)
 {
 	char **map;
-	int i;
 	int x;
 	int y;
 
-	i = -1;
 	x = 0;
 	y = 0;
 
@@ -47,8 +45,9 @@ int		checker_map(t_set *s)
 	map[(int)s->pl.y][(int)s->pl.x] = '0';
 	if(!checker_filler_map(s, map))
 		return (0);
-	while (map[++i])
-		ft_putendl_fd(map[i], 1);
+	// int i = -1;
+	// while (map[++i])
+	// 	ft_putendl_fd(map[i], 1);
 	if (map)
 		freearr(map);
 	return (1);

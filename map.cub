@@ -1,7 +1,7 @@
 R 1000 1000
 NO     ./textures/eagle.xpm                          
-SO ./textures/bluestone.xpm         
-WE ./textures/colorstone.xpm  
+SO ./textures/colorstone.xpm         
+WE ./textures/greystone.xpm  
 EA ./textures/mossy.xpm  
 
 S ./textures/barrel.xpm  

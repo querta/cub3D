@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 12:26:40 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 20:47:31 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,21 @@ static	char	**make_map(t_set *s, int size)
 }
 
 
-int			main_parser(int argc, char *argv, t_set *set)
+int			main_parser(char *argv, t_set *set)
 {
 	int		fd;
 	char	*line;
 
 	line = NULL;
-	fd = 0;
-	if (argc == 1)
-		fd = 0;
-	else if (argc == 2)
-		fd = open(argv, O_RDONLY);
-	else
-		return (0);
+	
+	fd = open(argv, O_RDONLY);
+
 	while (get_next_line(fd, &line))
 		parse_mapfile(set, line);
 	if (!parse_mapfile(set, line))
 		error(set, ER_SETTINGS);
 	set->map = make_map(set, ft_lstsize(set->mlist));
 	checker(set);
-	if (argc == 2)
-		close(fd);
+	close(fd);
 	return (1);
 }

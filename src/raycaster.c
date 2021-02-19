@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:12:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/18 17:22:03 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/19 21:43:01 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static	void	collision_calculation(t_set *s, t_point *map)
 
 static	void	ray_calculation(t_set *s, t_point *map)
 {
+	printf("raycalculator\n");
+	printf("%f\n", s->ray->cameraX);
 	s->ray->dirX = s->pl.dirY + s->pl.planeY * s->ray->cameraX;
+	printf("%f\n", s->ray->dirX);
 	s->ray->dirY = s->pl.dirX + s->pl.planeX * s->ray->cameraX;
 	s->ray->deltaDistX = fabs(1 / s->ray->dirX);
 	s->ray->deltaDistY = fabs(1 / s->ray->dirY);
@@ -65,10 +68,8 @@ static	void	ray_calculation(t_set *s, t_point *map)
 		s->ray->sideDistY = (map->y + 1.0 - s->pl.x) * s->ray->deltaDistY;
 	}
 }
-// (*(int *)(texture->addr + (w->tex[1] * texture->line_length + w->tex[0] * (texture->bits_per_pixel / 8))))
 
-
-int				draw_main(t_set *s)
+int				raycaster(t_set *s)
 {
 	int		x;
 	t_point	map;
@@ -81,13 +82,17 @@ int				draw_main(t_set *s)
 	{
 		map.x = (int)s->pl.y;
 		map.y = (int)s->pl.x;
+		printf("raycaster - %f\n", s->ray->cameraX);
 		ray.cameraX = 2 * x / (double)s->size_x - 1;
 		ray_calculation(s, &map);
-		collision_calculation(s, &map);		
+		collision_calculation(s, &map);
 		draw_all(s, x);
 		x++;
 	}
-	moveplayer(s);
-	mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, s->img->img, 0, 0);
+	if (!s->save)
+	{	
+		moveplayer(s);
+		mlx_put_image_to_window(s->mlx->mlx, s->mlx->win, s->img->img, 0, 0);
+	}
 	return (1);
 }
