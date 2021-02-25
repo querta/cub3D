@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 18:31:47 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 19:22:26 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "../src/libft/libft.h"
 # include "./utils.h"
-// # include "./mlx.h"
-// # include "../src/minilibx_mms/mlx.h"
 # include "mlx.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -39,6 +37,14 @@ typedef struct s_dpoint
 	double x;
 	double y;
 }			t_dpoint;
+
+typedef	struct s_sprite
+{
+	double x;
+	double y;
+	double dist;
+	t_spr *next;
+}				t_spr;
 
 typedef struct s_mlx
 {
@@ -132,6 +138,7 @@ typedef	struct	s_settings
 	t_list *mlist;
 	t_img *img;
 	t_ray *ray;
+	t_spr *spr;
 }				t_set;
 
 void error(t_set *s, int code);

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:12:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 13:52:36 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 19:25:00 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static	void	collision_calculation(t_set *s, t_point *map)
 	r = s->ray;
 	while (s->map[map->x][map->y] != '1')
 	{
+		if (s->map[map->x][map->y] != '2')
+		{
+			// создаем структуру со спрайтом x,y,dist
+			// сортируем по расстоянию
+			// отрисовываем подряд
+			s->spr->next = (t_spr *)malloc(sizeof(t_spr));
+			s->spr->x = map->x + 0.5;
+			s->spr->y = map->y + 0.5;
+
+		}
 		if (r->sideDistX < r->sideDistY)
 		{
 			r->sideDistX += r->deltaDistX;
@@ -83,6 +93,7 @@ int				raycaster(t_set *s)
 		ray_calculation(s, &map);
 		collision_calculation(s, &map);
 		draw_all(s, x);
+		draw_sprites(s, x);
 		x++;
 	}
 	if (s->save)
