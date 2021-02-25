@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 14:10:57 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 16:10:37 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int create_structs(int argc, char *argv)
 	set->tex->we = (t_img *)malloc(sizeof(t_img));
 	set->tex->ea = (t_img *)malloc(sizeof(t_img));
 	set->img = (t_img *)malloc(sizeof(t_img));
-	// set->mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	set->mlx = &mlx;
 	set->mlist = mlist;
 	set->save = argc - 2;

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 20:38:41 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 17:48:54 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,33 @@ static	int validate_map_line(char *str, t_set *set)
 	return (0);
 }
 
+static int parsecf(t_set *set, char *line)
+{
+	char *str;
+	char **colors;
+	int i;
+	int rgb[3];
+	int color;
 
+	str = ft_strtrim(line, " \n\t\v\f\r");
+	colors = ft_split(str, ',');
+	i = 0;
+	while (colors[i])
+		i++;
+	if (i != 3)
+		error(set, ER_SETTINGS);
+	while (i--)
+	{
+		if (ft_isnumstr(colors[i]))
+			rgb[i] = ft_atoi(colors[i]);
+		if (rgb[i] < 0 || rgb[i] > 255)
+			error(set, ER_SETTINGS);
+	}
+	color = (rgb[0]<<16) | (rgb[1]<<8) | (rgb[2]<<0);
+	free(str);
+	free(colors);
+	return (color);
+}
 
 int		parse_mapfile(t_set *set, char *line)
 {
@@ -87,9 +113,9 @@ int		parse_mapfile(t_set *set, char *line)
 	else if (line[0] == 'S' && line[1] == ' ')
 		set->s = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'F' && line[1] == ' ')
-		set->f = ft_strtrim(&line[1], " \n\t\v\f\r");
+		set->f = parsecf(set, &line[1]);
 	else if (line[0] == 'C' && line[1] == ' ')
-		set->c = ft_strtrim(&line[1], " \n\t\v\f\r");
+		set->c = parsecf(set, &line[1]);
 	else if (validate_map_line(line, set))
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 	else

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 15:07:18 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 17:51:33 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_player
 	double planeX;
 	double planeY;
 	char pos;
-	double dir;
 	int up;
 	int down;
 	int left;
@@ -126,8 +125,8 @@ typedef	struct	s_settings
 
 	int save;
 	char *s;
-	char *f;
-	char *c;
+	int f;
+	int	c;
 	char **map;
 	t_player pl;
 	t_mlx *mlx;
@@ -146,7 +145,6 @@ int				checker(t_set *set);
 int		checker_map(t_set *s);
 int				checker_filler_map(t_set *s, char **map);
 
-// char	**make_map(t_set *s, int size);
 int			cube_start(t_set *s);
 void			create_mlx(t_set *s);
 void		image_refresh(t_set *s);

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:50:58 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 14:48:09 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 16:47:30 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 	while (i < s->size_y)
 	{
 		if (i < drawStart)
-			color = 0x3232ff;
+			color = s->c;
 		else if (i >= drawStart && i <= drawEnd)
 		{
 			s->tex->y = (int)s->tex->pos & (s->tex->he - 1);
@@ -50,7 +50,7 @@ void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 			color = paint_walls(s);
 		}
 		else if (i > drawEnd)
-			color = 0x997777;
+			color = s->f;
 		my_mlx_pixel_put(s->img, x, i, color);
 		i++;
 	}

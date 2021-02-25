@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 14:11:17 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 16:29:57 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static	void freestruct(t_set *s)
 	free(s->tex->ea);
 	free(s->tex);
 	free(s->s);
-	free(s->f);
-	free(s->c);
 	free(s->img);
-	// free(s->mlx);
 }
 
 static	void		lst_del(void *content)

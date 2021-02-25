@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 16:08:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 12:17:52 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 17:56:51 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static	void	rotateplayer(t_set *s, double rot)
 	old_dir_x = s->pl.dirX;
 	s->pl.dirX = s->pl.dirX * cos(rot) - s->pl.dirY * sin(rot);
 	s->pl.dirY = old_dir_x * sin(rot) + s->pl.dirY * cos(rot);
-	s->pl.dir = cos(s->pl.dir) * acos(rot) - sin(s->pl.dirY) * asin(rot);
 	old_plane_x = s->pl.planeX;
 	s->pl.planeX = s->pl.planeX * cos(rot) - s->pl.planeY * sin(rot);
 	s->pl.planeY = old_plane_x * sin(rot) + s->pl.planeY * cos(rot);

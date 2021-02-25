@@ -6,11 +6,25 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 13:38:35 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 17:22:39 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	ft_isnumstr(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isdigit(s[i]))
+			return(0);
+		i++;
+	}
+	return (1);
+}
 
 int ft_isspace(char c)
 {
