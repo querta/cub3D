@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 12:07:19 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 18:22:23 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static	char	**make_map(t_set *s, int size)
 	int		i;
 
 	tmp = s->mlist;
-	map = ft_calloc(size + 1, sizeof(char *));
+	if (!(map = ft_calloc(size + 1, sizeof(char *))))
+		error(s, MALLOC)
 	i = -1;
 	while (tmp)
 	{

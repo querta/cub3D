@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 16:29:57 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 18:28:25 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ static	int exit_free(t_set *s)
 	freestruct(s);
 	free(s->map);
 	free(s);
-	exit (0);
+
+	exit (1);
 }
 
 void error(t_set *s, int code)
 {
+	if (code = SUCCESS)
+		exit (0);
 	if (code == ER_MAP)
 		ft_putendl_fd("Wrong map", 1);
 	if (code == ER_SETTINGS)
@@ -57,5 +60,7 @@ void error(t_set *s, int code)
 		ft_putendl_fd("Error making screenshot", 1);
 	if (code == ER_OPEN)
 		ft_putendl_fd("Error opening file", 1);
+	if (code == MALLOC)
+		ft_putendl_fd("Memory allocation error", 1);
 	exit_free (s);
 }

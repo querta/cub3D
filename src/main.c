@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 16:10:37 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 18:16:29 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int create_structs(int argc, char *argv)
 	t_player player;
 	
 	// ft_bzero(&set, sizeof(set));
-	set = (t_set *)malloc(sizeof(t_set));
+	if (!(set = (t_set *)malloc(sizeof(t_set))))
+	{
+		ft_putendl_fd("Memory allocation error", 1);
+		exit(0);	
+	}
 	ft_bzero(&mlx, sizeof(mlx));
 	ft_bzero(&mlist, sizeof(mlist));
 	ft_bzero(&player, sizeof(player));

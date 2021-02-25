@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 19:10:22 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 18:31:55 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 static	int	check_settings(t_set *set)
 {
-	if (set->tex->no->path && set->tex->so->path && set->tex->we->path && set->tex->ea->path)
+	if (set->tex && set->tex->no && set->tex->so && set->tex->we && set->tex->ea)
 		return (1);
-	else if (set->s && set->f && set->c)
+	else if (set->img && set->tex->no->path && set->tex->so->path)
+		return (1);
+	else if (set->tex->we->path && set->tex->ea->path)
+		return (1);
+	else if (set->s)
 		return (1);
 	else
 		return (0);

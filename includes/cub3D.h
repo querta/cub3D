@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 17:51:33 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 18:31:47 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ typedef	struct	s_settings
 	int size_x;
 	int size_y;
 	t_tex *tex;
-
 	int save;
 	char *s;
 	int f;
