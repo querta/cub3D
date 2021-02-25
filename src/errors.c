@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 22:43:14 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 14:11:17 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static	void freestruct(t_set *s)
 	free(s->s);
 	free(s->f);
 	free(s->c);
+	free(s->img);
+	// free(s->mlx);
 }
 
 static	void		lst_del(void *content)
@@ -37,8 +39,8 @@ static	int exit_free(t_set *s)
 {
 	// if (s->mlx->win)
 	// 	mlx_destroy_window(s->mlx->mlx, s->mlx->win);
-	// if(s->img->img)
-	// 	mlx_destroy_image(s->mlx->mlx, s->img->img);
+	if(s->img->img)
+		mlx_destroy_image(s->mlx->mlx, s->img->img);
 	ft_lstclear(&s->mlist, &lst_del);
 	freestruct(s);
 	free(s->map);
@@ -54,5 +56,9 @@ void error(t_set *s, int code)
 		ft_putendl_fd("Wrong map, check settings", 1);
 	if (code == ER_TEXTURE)
 		ft_putendl_fd("Error reading texture", 1);
+	if (code == ER_SCREEN)
+		ft_putendl_fd("Error making screenshot", 1);
+	if (code == ER_OPEN)
+		ft_putendl_fd("Error opening file", 1);
 	exit_free (s);
 }

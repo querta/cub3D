@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 16:08:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 16:17:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 12:17:52 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static	void	rotateplayer(t_set *s, double rot)
 
 static	void	move_forth_back(t_set *s, int dir)
 {
-	if (s->map[(int)s->pl.y][(int)(s->pl.x + dir * s->pl.dirX * SPEED)] != '1')
+	if (s->map[(int)s->pl.y][(int)(s->pl.x + dir * s->pl.dirX * (SPEED + 0.3))] != '1')
 		s->pl.x += dir * s->pl.dirX * SPEED;
-	if (s->map[(int)(s->pl.y + dir * s->pl.dirY * SPEED)][(int)s->pl.x] != '1')
+	if (s->map[(int)(s->pl.y + dir * s->pl.dirY * (SPEED + 0.3))][(int)s->pl.x] != '1')
 		s->pl.y += dir * s->pl.dirY * SPEED;
 }
 

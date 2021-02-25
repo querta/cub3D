@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 22:34:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 13:58:36 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 static	int             keypress(int keycode, t_set *s)
 {
-	double coords;
-
-	coords = (double)SPEED / 100;
 	if (keycode == 53)
 		error(s, 0);
 	if (keycode == 13 || keycode == 126)
@@ -42,9 +39,6 @@ static	int             keypress(int keycode, t_set *s)
 
 static	int             keyrelease(int keycode, t_set *s)
 {
-	double coords;
-
-	coords = (double)SPEED / 100;;
 	if (keycode == 13 || keycode == 126)
 		s->pl.up = 0;
 	if (keycode == 1 || keycode == 125)
@@ -72,19 +66,13 @@ static	int closewin(t_set *s)
 
 int			cube_start(t_set *s)
 {
-	// int i = -1;
-	// write(1, "map\n", 4);
-	// while (s->map[++i])
-	// 	ft_putendl_fd(s->map[i], 1);
 	create_mlx(s);
 	if (!s->save)
 	{
 		mlx_hook(s->mlx->win, 2, 1L<<0, keypress, s);
 		mlx_hook(s->mlx->win, 17, 0L, closewin, s);
-
 		mlx_loop_hook(s->mlx->mlx, raycaster, s);
 		mlx_key_hook(s->mlx->win, keyrelease, s);
-
 		mlx_loop(s->mlx->mlx);
 	}
 	else

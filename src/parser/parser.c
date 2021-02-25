@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 22:05:00 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 12:07:19 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			main_parser(char *argv, t_set *set)
 
 	line = NULL;
 	fd = open(argv, O_RDONLY);
+	if (fd == -1)
+		error(set, ER_OPEN);
 	while (get_next_line(fd, &line))
 		parse_mapfile(set, line);
 	if (!parse_mapfile(set, line))

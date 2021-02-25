@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:12:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 22:41:32 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 13:52:36 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int				raycaster(t_set *s)
 		x++;
 	}
 	if (s->save)
-		// printf("bytresperpix=%d");
 		save_screenshot(s);
 	else if (!s->save)
 	{	

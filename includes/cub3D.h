@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/19 22:41:46 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/25 15:07:18 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ typedef struct s_player
 typedef enum		e_codes
 {
 	SUCCESS,
-	ER_ARGS,
 	ER_MAP,
 	ER_SETTINGS,
 	ER_TEXTURE,
 	ER_SCREEN,
+	ER_OPEN,
 	MALLOC
 }					t_codes;
 
@@ -150,7 +150,6 @@ int				checker_filler_map(t_set *s, char **map);
 int			cube_start(t_set *s);
 void			create_mlx(t_set *s);
 void		image_refresh(t_set *s);
-// int	draw_map(t_set *s);
 int				raycaster(t_set *s);
 void	draw_all(t_set *s, int x);
 void	moveplayer(t_set *s);
