@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:01:22 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 13:58:36 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 13:48:24 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@ static	int             keypress(int keycode, t_set *s)
 		s->pl.up = 1;
 	if (keycode == 1 || keycode == 125)
 		s->pl.down = 1;
-	// if (keycode == 0)
-	// 	s->pl.left = 1;
-	// if (keycode == 2)
-	// 	s->pl.right = 1;
+	if (keycode == 0)
+		s->pl.left = 1;
+	if (keycode == 2)
+		s->pl.right = 1;
 	if (keycode == 123)
 		s->pl.lrot = 1;
 	if (keycode == 124)
-		s->pl.rrot = 1;
-	if (keycode == 0)
-		s->pl.lrot = 1;
-	if (keycode == 2)
 		s->pl.rrot = 1;
 
 	return (0);
@@ -43,17 +39,13 @@ static	int             keyrelease(int keycode, t_set *s)
 		s->pl.up = 0;
 	if (keycode == 1 || keycode == 125)
 		s->pl.down = 0;
-	// if (keycode == 0)		
-	// 	s->pl.left = 0;
-	// if (keycode == 2)
-	// 	s->pl.right = 0;
+	if (keycode == 0)		
+		s->pl.left = 0;
+	if (keycode == 2)
+		s->pl.right = 0;
 	if (keycode == 123)
 		s->pl.lrot = 0;
 	if (keycode == 124)
-		s->pl.rrot = 0;
-	if (keycode == 0)
-		s->pl.lrot = 0;
-	if (keycode == 2)
 		s->pl.rrot = 0;
 	return (0);
 }

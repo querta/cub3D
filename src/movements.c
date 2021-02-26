@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 16:08:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 17:56:51 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 13:48:05 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,10 @@ static	void	move_forth_back(t_set *s, int dir)
 
 static	void	move_sides(t_set *s, int dir)
 {
-	// if (asin(s->pl.dirY) < M_2_PI/3)
-	// 	dir *= -1;
-	// N и S - X меняется Y нет dirx=0, diry=-1 и diry = 1 если S
-	if (s->map[(int)s->pl.y][(int)(s->pl.x + dir * s->pl.dirX * SPEED)] != '1')
-		s->pl.x -= dir * sin(s->pl.dirY) * SPEED;
-	if (s->map[(int)(s->pl.y + dir * s->pl.dirY * SPEED)][(int)s->pl.x] != '1')
-		s->pl.y -= dir * cos(s->pl.dirX) * SPEED;
-	printf("x=%f y=%f dirX=%f, dirY=%f\n", s->pl.x, s->pl.y, s->pl.dirX, s->pl.dirY);
+	if (s->map[(int)s->pl.y][(int)(s->pl.x + -dir * s->pl.dirY * (SPEED + 0.2))] != '1')
+		s->pl.x += -dir * s->pl.dirY * SPEED;
+	if (s->map[(int)(s->pl.y + dir * s->pl.dirX * (SPEED + 0.2))][(int)s->pl.x] != '1')
+		s->pl.y += dir * s->pl.dirX * SPEED;
 }
 
 void			moveplayer(t_set *s)
