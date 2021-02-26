@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 17:48:54 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 14:15:29 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		parse_mapfile(t_set *set, char *line)
 	else if (line[0] == 'E' && line[1] == 'A')
 		set->tex->ea->path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'S' && line[1] == ' ')
-		set->s = ft_strtrim(&line[1], " \n\t\v\f\r");
+		set->tex->spr->path = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'F' && line[1] == ' ')
 		set->f = parsecf(set, &line[1]);
 	else if (line[0] == 'C' && line[1] == ' ')

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 18:28:25 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 20:26:05 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static	void freestruct(t_set *s)
 	free(s->tex->so);
 	free(s->tex->we);
 	free(s->tex->ea);
+	free(s->tex->spr);
 	free(s->tex);
-	free(s->s);
 	free(s->img);
+	free(s->spr);
+	free(s->ray);
 }
 
 static	void		lst_del(void *content)
@@ -34,8 +36,6 @@ static	void		lst_del(void *content)
 
 static	int exit_free(t_set *s)
 {
-	// if (s->mlx->win)
-	// 	mlx_destroy_window(s->mlx->mlx, s->mlx->win);
 	if(s->img->img)
 		mlx_destroy_image(s->mlx->mlx, s->img->img);
 	ft_lstclear(&s->mlist, &lst_del);
@@ -48,7 +48,7 @@ static	int exit_free(t_set *s)
 
 void error(t_set *s, int code)
 {
-	if (code = SUCCESS)
+	if (code == SUCCESS)
 		exit (0);
 	if (code == ER_MAP)
 		ft_putendl_fd("Wrong map", 1);

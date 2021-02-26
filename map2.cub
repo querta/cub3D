@@ -1,16 +1,16 @@
 R 640 640
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO     ./textures/eagle.xpm                          
+SO ./textures/colorstone.xpm         
+WE ./textures/greystone.xpm  
+EA ./textures/mossy.xpm  
 
-S ./path_to_the_sprite_texture
-F 220,100,0
-C 225,30,0
+S ./textures/barrel.xpm  
+F 153,119,119
+C 50,50,255
 
 111111111
 100000001
-100000001
+100020001
 100000001
 1000N0001
 100000001

@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/02/25 14:45:04 by mmonte           ###   ########.fr        #
+#    Updated: 2021/02/26 19:13:39 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRC = get_next_line.c \
 	parser/parser.c parser/parse_mapfile.c parser/parse_player.c \
 	processor.c \
 	checker/checker.c checker/checker_filler_map.c checker/checker_map.c \
-	utils.c errors.c mlx_utils.c raycaster.c draw_all.c \
-	movements.c save_screenshot.c
+	utils.c errors.c mlx_utils.c movements.c save_screenshot.c \
+	raycaster.c sprite_calculator.c draw_all.c draw_sprites.c 
 
 ## draw_map2d.c
 

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 22:35:25 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 15:07:17 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 14:31:29 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	save_screenshot(t_set *s)
 	}
 	if (fd == -1)
 		error(s, ER_SCREEN);
+	ft_putendl_fd("cub3d.bmp successfully created", 1);
 	error(s, SUCCESS);
 }

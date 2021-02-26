@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 19:22:26 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 20:14:07 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef	struct s_sprite
 	double x;
 	double y;
 	double dist;
-	t_spr *next;
+	// struct	s_sprite *next;
 }				t_spr;
 
 typedef struct s_mlx
@@ -60,6 +60,8 @@ typedef struct  s_img
     int         bits_per_pixel;
     int         line_length;
     int         endian;
+	int			wi;
+	int			he;
 }               t_img;
 
 typedef struct s_tex
@@ -68,6 +70,7 @@ typedef struct s_tex
 	t_img *so;
 	t_img *we;
 	t_img *ea;
+	t_img *spr;
 	char *path;
 	int wi;
 	int he;
@@ -90,6 +93,7 @@ typedef struct s_ray
 	double cameraX;
 	double cameraY;
 	double wall;
+	double *buffer;
 	int stepX;
 	int stepY;
 	int side;
@@ -129,7 +133,7 @@ typedef	struct	s_settings
 	int size_y;
 	t_tex *tex;
 	int save;
-	char *s;
+	int sprites;
 	int f;
 	int	c;
 	char **map;
@@ -150,12 +154,14 @@ int		parse_player(t_set *s);
 int				checker(t_set *set);
 int		checker_map(t_set *s);
 int				checker_filler_map(t_set *s, char **map);
-
+void save_sprites(t_set *s);
 int			cube_start(t_set *s);
 void			create_mlx(t_set *s);
 void		image_refresh(t_set *s);
 int				raycaster(t_set *s);
+void	sprite_calculator(t_set *s, t_point *map);
 void	draw_all(t_set *s, int x);
+void	draw_sprites(t_set *s);
 void	moveplayer(t_set *s);
 void	free_img(t_set *s);
 void	save_screenshot(t_set *s);

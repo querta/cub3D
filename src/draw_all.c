@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:50:58 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 16:47:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 19:54:13 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,31 @@ void calculate_textures(t_set *s, int x)
 	draw_vert(s, x, drawStart, drawEnd);
 }
 
+static void	get_texsize(t_set *s)
+{
+	if (s->ray->side == 1 && s->ray->dirY > 0)
+	{
+		s->tex->wi = s->tex->we->wi;
+		s->tex->he = s->tex->we->he;
+	}
+	if (s->ray->side == 1 && s->ray->dirY <= 0)
+	{
+		s->tex->wi = s->tex->ea->wi;
+		s->tex->he = s->tex->ea->he;
+	}
+	if (s->ray->side == 0 && s->ray->dirY > 0)
+	{
+		s->tex->wi = s->tex->so->wi;
+		s->tex->he = s->tex->so->he;
+	}
+	if (s->ray->side == 0 && s->ray->dirY <= 0)
+	{
+		s->tex->wi = s->tex->no->wi;
+		s->tex->he = s->tex->no->he;
+	}
+}
+
+
 void	draw_all(t_set *s, int x)
 {	
 	s->tex->wallx = 0;
@@ -82,6 +107,7 @@ void	draw_all(t_set *s, int x)
 	else
 		s->tex->wallx = s->pl.y + s->ray->wall * s->ray->dirX;
 	s->tex->wallx -= floor((s->tex->wallx));
+	get_texsize(s);
 	s->tex->x = (int)(s->tex->wallx * (double)s->tex->wi);
 	if (s->ray->side == 0 && s->ray->dirX > 0) 
 		s->tex->x = s->tex->wi - s->tex->x - 1;

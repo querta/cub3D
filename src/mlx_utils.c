@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 14:03:26 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/26 19:55:01 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	image_refresh(t_set *s)
 
 void create_teximg(t_set *s, t_img *img)
 {
-	if (!(img->img = mlx_xpm_file_to_image(s->mlx->mlx, img->path, &s->tex->wi, &s->tex->he)))
+	if (!(img->img = mlx_xpm_file_to_image(s->mlx->mlx, img->path, &img->wi, &img->he)))
 		error(s, ER_TEXTURE);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
 }
 
 void	create_textures(t_set *s)
 {
-
 	create_teximg(s, s->tex->no);
 	create_teximg(s, s->tex->so);
 	create_teximg(s, s->tex->we);
 	create_teximg(s, s->tex->ea);
+	create_teximg(s, s->tex->spr);
 
 }
 
