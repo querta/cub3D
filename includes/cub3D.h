@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 20:14:07 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 20:53:30 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define CUB3D_H
 
 # include "../src/libft/libft.h"
-# include "./utils.h"
-# include "mlx.h"
+# include <utils.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
 
 # define SCALE 15
-# define SPEED 0.05
+# define SPEED 1
 
 # include <stdio.h>
 
@@ -38,13 +38,12 @@ typedef struct s_dpoint
 	double y;
 }			t_dpoint;
 
-typedef	struct s_sprite
+typedef	struct s_curspr
 {
-	double x;
-	double y;
-	double dist;
-	// struct	s_sprite *next;
-}				t_spr;
+	double	x;
+	double	y;
+	double	dist;
+}				t_curspr;
 
 typedef struct s_mlx
 {
@@ -99,6 +98,19 @@ typedef struct s_ray
 	int side;
 }			t_ray;
 
+typedef struct s_sprite
+{
+	int count;
+	double x;
+	double y;
+	int height;
+	int width;
+	int screen_x;
+	double coef;
+	double transform_x;
+	double transform_y;
+}			t_sprite;
+
 typedef struct s_player
 {
 	double x;
@@ -133,7 +145,6 @@ typedef	struct	s_settings
 	int size_y;
 	t_tex *tex;
 	int save;
-	int sprites;
 	int f;
 	int	c;
 	char **map;
@@ -142,7 +153,8 @@ typedef	struct	s_settings
 	t_list *mlist;
 	t_img *img;
 	t_ray *ray;
-	t_spr *spr;
+	t_curspr *spr;
+	t_sprite *sp;
 }				t_set;
 
 void error(t_set *s, int code);

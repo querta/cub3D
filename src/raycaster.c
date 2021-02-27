@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:12:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 21:00:29 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 17:26:29 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,8 @@ int				raycaster(t_set *s)
 {
 	int		x;
 	t_point	map;
-	// double buffer[s->size_x];
-	// t_ray	ray;
 
-	// s->ray->buffer = (double *)malloc(sizeof(double) * s->size_x);
-	// s->ray = &ray;
+	s->ray->buffer = (double *)malloc(sizeof(double) * s->size_x);
 	x = 0;
 	image_refresh(s);
 	while (x < (int)s->size_x)
@@ -87,11 +84,11 @@ int				raycaster(t_set *s)
 		ray_calculation(s, &map);
 		collision_calculation(s, &map);
 		draw_all(s, x);
-		// buffer[x] = s->ray->wall;
-		// s->ray->buffer = buffer;
+		s->ray->buffer[x] = s->ray->wall;
 		x++;
 	}
 	draw_sprites(s);
+	free(s->ray->buffer);
 	if (s->save)
 		save_screenshot(s);
 	else if (!s->save)

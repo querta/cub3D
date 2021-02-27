@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 19:55:01 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 17:20:56 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void	create_mlx(t_set *s)
 		s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
 	}
 	else if (s->save)
-	{
-		s->size_x = 640;
-		s->size_y = 640;
-	}
+		s->size_y += 1;
 	create_textures(s);
 }

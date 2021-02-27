@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/17 14:17:59 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 21:46:18 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static int check_corner(char **map, int y, int x)
 {
+	if (map[y - 1][x] ||map[y - 1][x] == ' ')
+		return (0);
+	if (map[y + 1][x] || map[y + 1][x] == ' ')
+		return (0);
+	if (map[y][x - 1] || map[y][x - 1] == ' ')
+		return (0);
+	if (map[y][x + 1] || map[y][x + 1] == ' ')
+		return (0);
 	if (map[y + 1][x + 1] == '\0' || map[y + 1][x + 1] == ' ')
 		return (0);
 	if (map[y + 1][x - 1] == '\0' || map[y + 1][x - 1] == ' ')
@@ -32,7 +40,7 @@ static int check_filled_point(char **map, int y, int x)
 	len = 0;
 	while (map[len])
 		len++;
-	if (y < len -1 && y > 0)
+	if (y < len - 1 && y > 0)
 	{
 		if (x < (int)ft_strlen(map[y]) && x > 0)
 		{
@@ -55,7 +63,7 @@ static int checkborders(char **map)
 		k = 0;
 		while (map[i][k])
 		{
-			if (map[i][k] == 'x')
+			if (map[i][k] == 'x' || map[i][k] == '2')
 			{
 				if (check_filled_point(map, i, k) == 0)
 					return (0);	

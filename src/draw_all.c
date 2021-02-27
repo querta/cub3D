@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:50:58 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 19:54:13 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 20:33:19 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int paint_walls(t_set *s)
 	return (color);
 }
 
-void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
+static	void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 {
 	int i;
 	int color;
@@ -56,7 +56,7 @@ void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 	}
 }
 
-void calculate_textures(t_set *s, int x)
+static	void calculate_textures(t_set *s, int x)
 {
 	int lineHeight;
 	int drawStart;

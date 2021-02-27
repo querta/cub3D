@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 20:25:55 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 20:51:34 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int create_structs(int argc, char *argv)
 	if (!(set = (t_set *)malloc(sizeof(t_set))))
 	{
 		ft_putendl_fd("Memory allocation error", 1);
-		exit(0);	
+		exit(1);	
 	}
 	ft_bzero(&mlx, sizeof(mlx));
 	ft_bzero(&mlist, sizeof(mlist));
@@ -34,13 +34,14 @@ int create_structs(int argc, char *argv)
 	set->tex->ea = (t_img *)malloc(sizeof(t_img));
 	set->tex->spr = (t_img *)malloc(sizeof(t_img));
 	set->ray = (t_ray *)malloc(sizeof(t_ray));
+	set->sp = (t_sprite *)malloc(sizeof(t_sprite));
 	set->img = (t_img *)malloc(sizeof(t_img));
-	set->sprites = 0;
+	set->sp->count = 0;
 	set->mlx = &mlx;
 	set->mlist = mlist;
 	set->save = argc - 2;
 	main_parser(argv, set);
-	set->spr = (t_spr *)malloc(sizeof(t_spr) * set->sprites);
+	set->spr = (t_curspr *)malloc(sizeof(t_curspr) * set->sp->count);
 	save_sprites(set);
 	cube_start(set);
 

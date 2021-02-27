@@ -1,6 +1,9 @@
 .DS_Store
 .vscode/*
 
+valid_maps/*
+invalid_maps/*
+checker_cub3D/*
 # Prerequisites
 *.d
 

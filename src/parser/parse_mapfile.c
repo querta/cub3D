@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 14:15:29 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 18:56:53 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ static int parsecf(t_set *set, char *line)
 	}
 	color = (rgb[0]<<16) | (rgb[1]<<8) | (rgb[2]<<0);
 	free(str);
+	i = 0;
+	while (colors[i])
+		free(colors[i++]);
 	free(colors);
 	return (color);
 }
@@ -110,15 +113,16 @@ int		parse_mapfile(t_set *set, char *line)
 		set->tex->we->path = ft_strtrim(&line[2], " \n\t\v\f\r");
 	else if (line[0] == 'E' && line[1] == 'A')
 		set->tex->ea->path = ft_strtrim(&line[2], " \n\t\v\f\r");
-	else if (line[0] == 'S' && line[1] == ' ')
+	else if (line[0] == 'S' && ft_strchr(&line[1], '.'))
 		set->tex->spr->path = ft_strtrim(&line[1], " \n\t\v\f\r");
 	else if (line[0] == 'F' && line[1] == ' ')
 		set->f = parsecf(set, &line[1]);
 	else if (line[0] == 'C' && line[1] == ' ')
 		set->c = parsecf(set, &line[1]);
 	else if (validate_map_line(line, set))
+	{
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
-	else
 		return (0);
+	}
 	return (1);
 }

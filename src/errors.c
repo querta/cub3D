@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:22:47 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 20:26:05 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/02/27 21:52:23 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	void freestruct(t_set *s)
 	free(s->tex->so->path);
 	free(s->tex->we->path);
 	free(s->tex->ea->path);
+	free(s->tex->spr->path);
 	free(s->tex->no);
 	free(s->tex->so);
 	free(s->tex->we);
@@ -42,7 +43,6 @@ static	int exit_free(t_set *s)
 	freestruct(s);
 	free(s->map);
 	free(s);
-
 	exit (1);
 }
 
