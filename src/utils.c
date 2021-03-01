@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 17:22:39 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 14:15:44 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ int ft_isspace(char c)
 	if (c == '\v' || c == '\f')
 		return (1);
 	if (c == '\r' || c == ' ')
+		return (1);
+	return (0);
+}
+
+int		check_mapsign(char c)
+{
+	if (c == '0' || c == '1' || c == '2')
+		return (1);
+	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }

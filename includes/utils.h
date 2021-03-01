@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:16:45 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/25 17:22:17 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 14:16:02 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ft_isspace(char c);
 int		ft_isnumstr(char *s);
 void	freearr(char **arr);
 int		arrsize(char **arr);
+int		check_mapsign(char c);
 
 
 #endif

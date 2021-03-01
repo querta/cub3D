@@ -6,23 +6,32 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 21:46:18 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 13:42:21 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int check_corner(char **map, int y, int x)
+static int check_cross(char **map, int y, int x)
 {
-	if (map[y - 1][x] ||map[y - 1][x] == ' ')
+	if (x > (int)ft_strlen(map[y + 1]) - 1) 
 		return (0);
-	if (map[y + 1][x] || map[y + 1][x] == ' ')
+	if (x > (int)ft_strlen(map[y - 1]) - 1)
 		return (0);
-	if (map[y][x - 1] || map[y][x - 1] == ' ')
+	if (map[y - 1][x] == '\0' || map[y - 1][x] == ' ')
 		return (0);
-	if (map[y][x + 1] || map[y][x + 1] == ' ')
+	if (map[y + 1][x] == '\0' || map[y + 1][x] == ' ')
 		return (0);
-	if (map[y + 1][x + 1] == '\0' || map[y + 1][x + 1] == ' ')
+	if (map[y][x - 1] == '\0' || map[y][x - 1] == ' ') 
+		return (0);
+	if (map[y][x + 1] == '\0' || map[y][x + 1] == ' ')
+		return (0);
+	return (1);
+}
+
+static int check_corners(char **map, int y, int x)
+{
+	if (map[y + 1][x + 1] == '\0' || map[y + 1][x + 1] == ' ') 
 		return (0);
 	if (map[y + 1][x - 1] == '\0' || map[y + 1][x - 1] == ' ')
 		return (0);
@@ -44,7 +53,9 @@ static int check_filled_point(char **map, int y, int x)
 	{
 		if (x < (int)ft_strlen(map[y]) && x > 0)
 		{
-			if (check_corner(map, y, x))
+			if (check_corners(map, y, x))
+				return (1);
+			if (check_cross(map, y, x))
 				return (1);
 		}
 	}

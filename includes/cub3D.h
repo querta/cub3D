@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 20:53:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:54:33 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,8 @@ int				main(int argc, char **argv);
 int				main_parser(char *argv, t_set *set);
 int		parse_mapfile(t_set *set, char *line);
 int		parse_player(t_set *s);
-int				checker(t_set *set);
+int		map_validator(t_set *set);
+int		check_settings(t_set *set);
 int		checker_map(t_set *s);
 int				checker_filler_map(t_set *s, char **map);
 void save_sprites(t_set *s);

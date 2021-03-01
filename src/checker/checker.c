@@ -6,33 +6,33 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 14:41:56 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:54:49 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static	int	check_settings(t_set *set)
+int	check_settings(t_set *set)
 {
 	if (set->tex && set->tex->no && set->tex->so && set->tex->we && set->tex->ea)
-		return (1);
-	else if (set->img && set->tex->no->path && set->tex->so->path)
-		return (1);
-	else if (set->tex->we->path && set->tex->ea->path && set->tex->spr->path)
-		return (1);
-	else if (set->spr)
-		return (1);
-	else
-		return (0);
+	{
+		if (set->img && set->tex->no->path && set->tex->so->path)
+		{
+			if (set->tex->we->path && set->tex->ea->path && set->tex->spr->path)
+			{
+				if (set->tex->spr->path && set->c >= 0 && set->f >= 0)
+					return (1);
+			}
+		}
+	}
+	return (0);
 }
 
-int checker(t_set *set)
+int map_validator(t_set *set)
 {
 	if (!parse_player(set))
 		error(set, ER_MAP);
 	if (!checker_map(set))
 		error(set, ER_MAP);
-	if (!check_settings(set))
-		error(set, ER_SETTINGS);
 	return (1);
 }

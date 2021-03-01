@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # make re > /dev/null
-make re
+make
 # printf "\e[32myour program output: \e[0m\n"
 # if [ "$2" = "-s" ]; then flag_a=1 fi
 # then

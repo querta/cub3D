@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 20:51:34 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/01 16:31:25 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int create_structs(int argc, char *argv)
 	t_list	*mlist;
 	t_mlx	mlx;
 	t_player player;
-	
+
 	if (!(set = (t_set *)malloc(sizeof(t_set))))
 	{
 		ft_putendl_fd("Memory allocation error", 1);
@@ -33,6 +33,13 @@ int create_structs(int argc, char *argv)
 	set->tex->we = (t_img *)malloc(sizeof(t_img));
 	set->tex->ea = (t_img *)malloc(sizeof(t_img));
 	set->tex->spr = (t_img *)malloc(sizeof(t_img));
+
+	set->tex->no->path = NULL;
+	set->tex->so->path = NULL;
+	set->tex->we->path = NULL;
+	set->tex->ea->path = NULL;
+	set->tex->spr->path = NULL;
+
 	set->ray = (t_ray *)malloc(sizeof(t_ray));
 	set->sp = (t_sprite *)malloc(sizeof(t_sprite));
 	set->img = (t_img *)malloc(sizeof(t_img));
@@ -40,6 +47,8 @@ int create_structs(int argc, char *argv)
 	set->mlx = &mlx;
 	set->mlist = mlist;
 	set->save = argc - 2;
+	set->f = -1;
+	set->c = -1;
 	main_parser(argv, set);
 	set->spr = (t_curspr *)malloc(sizeof(t_curspr) * set->sp->count);
 	save_sprites(set);
