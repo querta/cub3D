@@ -6,15 +6,15 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 14:39:00 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:50:12 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int check_cross(char **map, int y, int x)
+static int	check_cross(char **map, int y, int x)
 {
-	if (x > (int)ft_strlen(map[y + 1]) - 1) 
+	if (x > (int)ft_strlen(map[y + 1]) - 1)
 		return (0);
 	if (x > (int)ft_strlen(map[y - 1]) - 1)
 		return (0);
@@ -22,16 +22,16 @@ static int check_cross(char **map, int y, int x)
 		return (0);
 	if (map[y + 1][x] == '\0' || map[y + 1][x] == ' ')
 		return (0);
-	if (map[y][x - 1] == '\0' || map[y][x - 1] == ' ') 
+	if (map[y][x - 1] == '\0' || map[y][x - 1] == ' ')
 		return (0);
 	if (map[y][x + 1] == '\0' || map[y][x + 1] == ' ')
 		return (0);
 	return (1);
 }
 
-static int check_corners(char **map, int y, int x)
+static int	check_corners(char **map, int y, int x)
 {
-	if (map[y + 1][x + 1] == '\0' || map[y + 1][x + 1] == ' ') 
+	if (map[y + 1][x + 1] == '\0' || map[y + 1][x + 1] == ' ')
 		return (0);
 	if (map[y + 1][x - 1] == '\0' || map[y + 1][x - 1] == ' ')
 		return (0);
@@ -42,7 +42,7 @@ static int check_corners(char **map, int y, int x)
 	return (1);
 }
 
-static int check_filled_point(char **map, int y, int x)
+static int	check_filled_point(char **map, int y, int x)
 {
 	int len;
 
@@ -58,13 +58,12 @@ static int check_filled_point(char **map, int y, int x)
 				if (check_cross(map, y, x))
 					return (1);
 			}
-				// return (1);
 		}
 	}
 	return (0);
 }
 
-static int checkborders(char **map)
+int			checkborders(char **map)
 {
 	int i;
 	int k;
@@ -79,7 +78,7 @@ static int checkborders(char **map)
 			if (map[i][k] == 'x' || map[i][k] == '2')
 			{
 				if (check_filled_point(map, i, k) == 0)
-					return (0);	
+					return (0);
 			}
 			k++;
 		}
@@ -88,7 +87,7 @@ static int checkborders(char **map)
 	return (1);
 }
 
-static int mapfiller(char **map, int y, int x)
+int			mapfiller(char **map, int y, int x)
 {
 	if (map[y][x] != '0')
 		return (0);
@@ -110,16 +109,5 @@ static int mapfiller(char **map, int y, int x)
 		mapfiller(map, y - 1, x + 1);
 	if (x > 0 && y < arrsize(map) - 1)
 		mapfiller(map, y + 1, x - 1);
-	return (1);
-}
-
-int checker_filler_map(t_set *s, char **map)
-{
-	mapfiller(map, (int)s->pl.y, (int)s->pl.x);
-	if (!checkborders(map))
-	{
-		freearr(map);
-		return (0);
-	}
 	return (1);
 }

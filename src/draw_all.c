@@ -6,13 +6,13 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:50:58 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 20:33:19 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 16:11:59 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int paint_walls(t_set *s)
+int			paint_walls(t_set *s)
 {
 	int color;
 
@@ -33,7 +33,7 @@ int paint_walls(t_set *s)
 	return (color);
 }
 
-static	void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
+static void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 {
 	int i;
 	int color;
@@ -56,7 +56,7 @@ static	void	draw_vert(t_set *s, int x, int drawStart, int drawEnd)
 	}
 }
 
-static	void calculate_textures(t_set *s, int x)
+static void	calculate_textures(t_set *s, int x)
 {
 	int lineHeight;
 	int drawStart;
@@ -99,7 +99,7 @@ static void	get_texsize(t_set *s)
 }
 
 
-void	draw_all(t_set *s, int x)
+void		draw_all(t_set *s, int x)
 {	
 	s->tex->wallx = 0;
 	if (s->ray->side == 0) 

@@ -6,18 +6,18 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 14:27:31 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 14:51:13 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:36:48 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int cfcolors(t_set *set, char *str)
+static int	cfcolors(t_set *set, char *str)
 {
-	char **colors;
-	int i;
-	int rgb[3];
-	int color;
+	char	**colors;
+	int		i;
+	int		rgb[3];
+	int		color;
 
 	colors = ft_split(str, ',');
 	i = 0;
@@ -30,7 +30,7 @@ static int cfcolors(t_set *set, char *str)
 		if ((rgb[i] = ft_atoi(colors[i])) > 255)
 			error(set, ER_SETTINGS);
 	}
-	color = (rgb[0]<<16) | (rgb[1]<<8) | (rgb[2]<<0);
+	color = (rgb[0] << 16) | (rgb[1] << 8) | (rgb[2] << 0);
 	i = 0;
 	while (colors[i])
 		free(colors[i++]);
@@ -38,12 +38,12 @@ static int cfcolors(t_set *set, char *str)
 	return (color);
 }
 
-static	int parsecf(t_set *set, char *line)
+static	int	parsecf(t_set *set, char *line)
 {
-	int i;
-	int k;
-	char *str;
-	int color;
+	int		i;
+	int		k;
+	char	*str;
+	int		color;
 
 	i = -1;
 	k = 0;
@@ -61,7 +61,7 @@ static	int parsecf(t_set *set, char *line)
 	return (color);
 }
 
-void save_colorpar(t_set *set, int *setting, char *str)
+void		save_colorpar(t_set *set, int *setting, char *str)
 {
 	if (*setting != -1)
 		error(set, ER_SETTINGS);

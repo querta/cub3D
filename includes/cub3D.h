@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 14:29:33 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:47:59 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ int		parse_player(t_set *s);
 int		map_validator(t_set *set);
 int		check_settings(t_set *set);
 int		checker_map(t_set *s);
-int				checker_filler_map(t_set *s, char **map);
+int mapfiller(char **map, int y, int x);
+int checkborders(char **map);
 void save_sprites(t_set *s);
 int			cube_start(t_set *s);
 void			create_mlx(t_set *s);

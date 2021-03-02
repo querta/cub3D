@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:08:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 13:29:20 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:36:34 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		count_sprites(t_set *s, char *str)
 	int i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '2')
 			s->sp->count++;
@@ -44,7 +44,7 @@ static	char	**make_map(t_set *s, int size)
 	return (map);
 }
 
-int			main_parser(char *argv, t_set *set)
+int				main_parser(char *argv, t_set *set)
 {
 	int		fd;
 	char	*line;

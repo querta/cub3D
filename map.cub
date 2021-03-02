@@ -1,7 +1,7 @@
 R 1000 900
 NO      ./textures/eagle.xpm                          
 SO ./textures/colorstone.xpm         
-WE./textures/greystone.xpm  
+WE ./textures/greystone.xpm  
 EA ./textures/mossy.xpm  
 
 S ./textures/barrel.xpm  
@@ -17,7 +17,7 @@ C 50,50,255
 11110111111111011100000010001   111
 11110111111111011101010010001
 11000000110101011100000010001111
-1000020000000000110000001000001
+1000020000000000110000001000111
 10000000000000001101010010001111
 11000001110101011111011110N01
 11110111 1110101 101111010001
@@ -25,4 +25,4 @@ C 50,50,255
 
 
 
-str=./textures/eagle.xpm
+ str=./textures/eagle.xpm

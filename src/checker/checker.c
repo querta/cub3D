@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/01 15:54:49 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:47:21 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_settings(t_set *set)
 {
-	if (set->tex && set->tex->no && set->tex->so && set->tex->we && set->tex->ea)
+	if (set->tex && set->tex->no && set->tex->so
+		&& set->tex->we && set->tex->ea)
 	{
 		if (set->img && set->tex->no->path && set->tex->so->path)
 		{
@@ -28,7 +29,7 @@ int	check_settings(t_set *set)
 	return (0);
 }
 
-int map_validator(t_set *set)
+int	map_validator(t_set *set)
 {
 	if (!parse_player(set))
 		error(set, ER_MAP);

@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:38:20 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/26 15:29:56 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:37:57 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	player_coordsew(t_set *s, int dirx, double ply)
 
 static void	player_coordsns(t_set *s, int diry, double plx)
 {
-	s->pl.dirX = 0; 
+	s->pl.dirX = 0;
 	s->pl.dirY = diry;
 	s->pl.planeX = plx;
-	s->pl.planeY = 0; 
+	s->pl.planeY = 0;
 }
 
 static int	player_fill(t_set *s, char *map, int y, char c)
@@ -58,7 +58,7 @@ static int	player_fill(t_set *s, char *map, int y, char c)
 int			parse_player(t_set *s)
 {
 	int		i;
-	int 	y;
+	int		y;
 	char	*c;
 	int		ret;
 
@@ -66,7 +66,7 @@ int			parse_player(t_set *s)
 	c = "NSEW";
 	i = 0;
 	y = 0;
-	while(s->map[y])
+	while (s->map[y])
 	{
 		i = 0;
 		while (c[i])
