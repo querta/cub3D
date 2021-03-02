@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleeptime=0.2
+sleeptime=2
 
 if [[ $# -eq 0 ]] ; then
     printf "Запусти ./check с аргументом нужных карт (из файла):\n"
@@ -17,11 +17,12 @@ printf "\e[1;36m\
 	do
 		printf "$i: "
 		if (( $i < 10 )); then
-			./cub3D ./valid_maps/valid_RGB_00$i.cub
+			./cub3D ./valid_maps/valid_RGB_00$i.cub &
 		else
-			./cub3D ./valid_maps/valid_RGB_0$i.cub
+			./cub3D ./valid_maps/valid_RGB_0$i.cub &
 		fi
-		sleep 1
+		sleep $sleeptime
+		pkill cub3D > /dev/null
 	done
 fi
 
@@ -31,14 +32,16 @@ printf "\e[1;36m\
 ./valid_maps/valid_map_area_0xx.cub \e[0m\n"
 	for ((i=0; i < 13; i++))
 	do
+	pkill cub3D > /dev/null
 	printf "$i: "
 		if (( $i < 10 )); then 
-			./cub3D ./valid_maps/valid_map_area_00$i.cub
+			./cub3D ./valid_maps/valid_map_area_00$i.cub &
 		else
-			./cub3D ./valid_maps/valid_map_area_0$i.cub
+			./cub3D ./valid_maps/valid_map_area_0$i.cub &
 		fi
 		sleep $sleeptime
-		killall cub3D
+		pkill cub3D > /dev/null
+	# killall cub3D > /dev/null
 	done
 fi
 
@@ -50,12 +53,12 @@ printf "\e[1;36m\
 	do
 	printf "$i: "
 		if (( $i < 10 )); then 
-			./cub3D ./valid_maps/valid_res_00$i.cub
+			./cub3D ./valid_maps/valid_res_00$i.cub &
 		else
-			./cub3D ./valid_maps/valid_res_0$i.cub
+			./cub3D ./valid_maps/valid_res_0$i.cub &
 		fi
 	sleep $sleeptime
-	killall cub3D
+	killall cub3D > /dev/null
 	done
 fi
 
@@ -67,11 +70,11 @@ printf "\e[1;36m\
 	do
 	printf "$i: "
 		if (( $i < 10 )); then 
-			./cub3D ./valid_maps/valid_tex_00$i.cub
+			./cub3D ./valid_maps/valid_tex_00$i.cub &
 		else
-			./cub3D ./valid_maps/valid_tex_0$i.cub
+			./cub3D ./valid_maps/valid_tex_0$i.cub &
 		fi
 		sleep $sleeptime
-		killall cub3D
+	killall cub3D > /dev/null
 	done
 fi

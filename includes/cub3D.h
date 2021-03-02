@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:57:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/01 15:54:33 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:29:33 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int				main(int argc, char **argv);
 int				main_parser(char *argv, t_set *set);
 int		parse_mapfile(t_set *set, char *line);
+void save_colorpar(t_set *set, int *setting, char *str);
 int		parse_player(t_set *s);
 int		map_validator(t_set *set);
 int		check_settings(t_set *set);

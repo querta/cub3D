@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:00:56 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/01 16:31:25 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 13:47:35 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ int create_structs(int argc, char *argv)
 	return (1);
 }
 
+static int check_filename(char *str)
+{
+	size_t len;
+
+	len = ft_strlen(str) - 1;
+	if (str[len] == 'b' && str[len-1] == 'u' && str[len-2] == 'c' && str[len-3] == '.')
+		return (1);
+	return (0);
+}
+
 static int check_saveparam(char *str)
 {
 	size_t len;
@@ -76,8 +86,13 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 		ft_putendl_fd("No map.cub", 1);
 	if (argc == 2)
-		create_structs(argc, argv[1]);
-	if (argc == 3)
+	{
+		if (check_filename(argv[1]))
+			create_structs(argc, argv[1]);
+		else
+			ft_putendl_fd("Invalid mapfilename", 1);
+	}
+	else if (argc == 3)
 	{
 		if (check_saveparam(argv[2]))
 			create_structs(argc, argv[1]);

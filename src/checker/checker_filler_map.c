@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/01 13:42:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:39:00 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ static int check_filled_point(char **map, int y, int x)
 		if (x < (int)ft_strlen(map[y]) && x > 0)
 		{
 			if (check_corners(map, y, x))
-				return (1);
-			if (check_cross(map, y, x))
-				return (1);
+			{
+				if (check_cross(map, y, x))
+					return (1);
+			}
+				// return (1);
 		}
 	}
 	return (0);
