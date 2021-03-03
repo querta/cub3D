@@ -1,8 +1,8 @@
 R 1000 900
-NO      ./textures/256-1.xpm                          
-SO ./textures/256-2.xpm         
-WE ./textures/256-3.xpm  
-EA ./textures/256-4.xpm  
+NO      ./textures/eagle.xpm                          
+SO ./textures/colorstone.xpm         
+WE ./textures/greystone.xpm  
+EA ./textures/mossy.xpm  
 
 S ./textures/barrel.xpm
 F 153,119,119

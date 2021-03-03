@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/03/03 17:24:59 by mmonte           ###   ########.fr        #
+#    Updated: 2021/03/03 18:39:48 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,11 +57,11 @@ clean:
 	make clean -C $(LIBFT_DIR)
 	make clean -C $(MLX_DIR)
 	rm -f $(OBJ)
-	rm -f $(MLX)
 	rm -f cub3d.bmp
 
 fclean: clean
 	rm -f $(LIBFT_DIR)$(LIBFT)
 	rm -f $(NAME)
+	rm -f $(MLX)
 
 re: fclean all
