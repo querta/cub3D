@@ -6,11 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 14:27:31 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 15:36:48 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:37:58 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static int	cfcolors(t_set *set, char *str)
 {

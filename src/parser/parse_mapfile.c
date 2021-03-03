@@ -6,11 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 16:30:12 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 18:32:47 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	parse_res(t_set *set, char *parstr)
 {
@@ -47,18 +47,21 @@ static	int	validate_map_line(char *str, t_set *set)
 
 	s = str;
 	i = 0;
-	if (ft_strchr(s, '0') || ft_strchr(s, '1'))
+	if (check_settings(set))
 	{
-		while (*s == ' ')
-			s++;
-		while (*s)
+		if (ft_strchr(s, '0') || ft_strchr(s, '1'))
 		{
-			if (check_mapsign(*s) || *s == ' ')
+			while (*s == ' ')
 				s++;
-			else
-				error(set, ER_MAP);
+			while (*s)
+			{
+				if (check_mapsign(*s) || *s == ' ')
+					s++;
+				else
+					error(set, ER_MAP);
+			}
+			return (1);
 		}
-		return (1);
 	}
 	return (0);
 }
@@ -85,20 +88,16 @@ int			parse_mapfile(t_set *set, char *line)
 		save_parametr(set, &set->tex->ea->path, &line[2]);
 	else if (line[0] == 'S' && ft_strchr(&line[1], '.'))
 		save_parametr(set, &set->tex->spr->path, &line[1]);
-	else if (line[0] == 'F')
+	else if (line[0] == 'F' && line[1] == ' ')
 		save_colorpar(set, &set->f, &line[1]);
-	else if (line[0] == 'C')
+	else if (line[0] == 'C' && line[1] == ' ')
 		save_colorpar(set, &set->c, &line[1]);
 	else if (validate_map_line(line, set))
 	{
-		if (!check_settings(set))
-			error(set, ER_SETTINGS);
 		ft_lstadd_back(&set->mlist, ft_lstnew(line));
 		return (0);
 	}
-	// else if (line[0] == '\0' || ft_isspace(line[0]))
-	// 	return(0);
-	else if (!empty_line(set, &line[1]))
+	else if (*line != '\0')
 		error(set, ER_SETTINGS);
 	return (1);
 }

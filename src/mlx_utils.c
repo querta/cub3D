@@ -6,11 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:29:13 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 17:20:56 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 18:28:07 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
@@ -29,11 +29,14 @@ void	image_refresh(t_set *s)
 			&s->img->bits_per_pixel, &s->img->line_length, &s->img->endian);
 }
 
-void create_teximg(t_set *s, t_img *img)
+void	create_teximg(t_set *s, t_img *img)
 {
-	if (!(img->img = mlx_xpm_file_to_image(s->mlx->mlx, img->path, &img->wi, &img->he)))
+	img->img = mlx_xpm_file_to_image(s->mlx->mlx,
+		img->path, &img->wi, &img->he);
+	if (!img->img)
 		error(s, ER_TEXTURE);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->img,
+		&img->bits_per_pixel, &img->line_length, &img->endian);
 }
 
 void	create_textures(t_set *s)
@@ -43,14 +46,17 @@ void	create_textures(t_set *s)
 	create_teximg(s, s->tex->we);
 	create_teximg(s, s->tex->ea);
 	create_teximg(s, s->tex->spr);
-
+	if (!check_texsize(s))
+		error(s, ER_TEXTURESIZE);
 }
 
 void	create_mlx(t_set *s)
 {
 	int		max_height;
 	int		max_width;
+	char	*n;
 
+	n = "cub3D";
 	s->mlx->mlx = mlx_init();
 	if (!s->save)
 	{
@@ -59,7 +65,7 @@ void	create_mlx(t_set *s)
 		s->size_y = (s->size_y > max_height) ? max_height : s->size_y;
 		s->size_x = (s->size_x < 640) ? 640 : s->size_x;
 		s->size_y = (s->size_y < 640) ? 640 : s->size_y;
-		s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, "kek");
+		s->mlx->win = mlx_new_window(s->mlx->mlx, s->size_x, s->size_y, n);
 	}
 	else if (s->save)
 		s->size_y += 1;

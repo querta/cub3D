@@ -6,13 +6,13 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:02:28 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 13:05:26 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:39:06 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
-int	ft_isnumstr(char *s)
+int		ft_isnumstr(char *s)
 {
 	int i;
 
@@ -20,13 +20,13 @@ int	ft_isnumstr(char *s)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int ft_isspace(char c)
+int		ft_isspace(char c)
 {
 	if (c == '\t' || c == '\n')
 		return (1);
@@ -46,7 +46,7 @@ int		check_mapsign(char c)
 	return (0);
 }
 
-int arrsize(char **arr)
+int		arrsize(char **arr)
 {
 	int size;
 
@@ -56,9 +56,11 @@ int arrsize(char **arr)
 	return (size);
 }
 
-void freearr(char **arr)
+void	freearr(char **arr)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);

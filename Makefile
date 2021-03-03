@@ -6,7 +6,7 @@
 #    By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 14:23:30 by mmonte            #+#    #+#              #
-#    Updated: 2021/03/02 14:28:51 by mmonte           ###   ########.fr        #
+#    Updated: 2021/03/03 17:24:59 by mmonte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER = includes/
 
 SRC_DIR = src/
 LIBFT_DIR = $(SRC_DIR)libft/
-MLX_DIR = $(SRC_DIR)minilibx_mms/
+MLX_DIR = minilibx_mms/
 
 SRC = get_next_line.c \
 	main.c \

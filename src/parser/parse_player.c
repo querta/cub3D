@@ -6,26 +6,26 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:38:20 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 15:37:57 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:44:55 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	player_coordsew(t_set *s, int dirx, double ply)
 {
-	s->pl.dirX = dirx;
-	s->pl.dirY = 0;
-	s->pl.planeX = 0;
-	s->pl.planeY = ply;
+	s->pl.dirx = dirx;
+	s->pl.diry = 0;
+	s->pl.planex = 0;
+	s->pl.planey = ply;
 }
 
 static void	player_coordsns(t_set *s, int diry, double plx)
 {
-	s->pl.dirX = 0;
-	s->pl.dirY = diry;
-	s->pl.planeX = plx;
-	s->pl.planeY = 0;
+	s->pl.dirx = 0;
+	s->pl.diry = diry;
+	s->pl.planex = plx;
+	s->pl.planey = 0;
 }
 
 static int	player_fill(t_set *s, char *map, int y, char c)

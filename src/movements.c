@@ -6,49 +6,61 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 16:08:38 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 15:27:59 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:47:16 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
-static	void	rotateplayer(t_set *s, double rot)
+static void	rotateplayer(t_set *s, double rot)
 {
 	double	old_plane_x;
 	double	old_dir_x;
 
-	old_dir_x = s->pl.dirX;
-	s->pl.dirX = s->pl.dirX * cos(rot) - s->pl.dirY * sin(rot);
-	s->pl.dirY = old_dir_x * sin(rot) + s->pl.dirY * cos(rot);
-	old_plane_x = s->pl.planeX;
-	s->pl.planeX = s->pl.planeX * cos(rot) - s->pl.planeY * sin(rot);
-	s->pl.planeY = old_plane_x * sin(rot) + s->pl.planeY * cos(rot);
+	old_dir_x = s->pl.dirx;
+	s->pl.dirx = s->pl.dirx * cos(rot) - s->pl.diry * sin(rot);
+	s->pl.diry = old_dir_x * sin(rot) + s->pl.diry * cos(rot);
+	old_plane_x = s->pl.planex;
+	s->pl.planex = s->pl.planex * cos(rot) - s->pl.planey * sin(rot);
+	s->pl.planey = old_plane_x * sin(rot) + s->pl.planey * cos(rot);
 }
 
-int ch_colls(char c)
+static int	ch_colls(char c)
 {
 	if (c == '1' || c == '2')
 		return (0);
 	return (1);
 }
 
-static	void	move_forth_back(t_set *s, int dir, double speed)
+static void	move_forth_back(t_set *s, int dir, double speed)
 {
-	if (ch_colls(s->map[(int)s->pl.y][(int)(s->pl.x + dir * s->pl.dirX * (speed + 0.3))]))
-		s->pl.x += dir * s->pl.dirX * speed;
-	if (ch_colls(s->map[(int)(s->pl.y + dir * s->pl.dirY * (speed + 0.3))][(int)s->pl.x]))
-		s->pl.y += dir * s->pl.dirY * speed;
+	if (ch_colls(s->map[(int)s->pl.y][(int)(s->pl.x + dir * s->pl.dirx *
+		(speed + 0.3))]))
+	{
+		s->pl.x += dir * s->pl.dirx * speed;
+	}
+	if (ch_colls(s->map[(int)(s->pl.y + dir * s->pl.diry *
+		(speed + 0.3))][(int)s->pl.x]))
+	{
+		s->pl.y += dir * s->pl.diry * speed;
+	}
 }
 
-static	void	move_sides(t_set *s, int dir, double speed)
+static void	move_sides(t_set *s, int dir, double speed)
 {
-	if (ch_colls(s->map[(int)s->pl.y][(int)(s->pl.x + -dir * s->pl.dirY * (speed + 0.3))]))
-		s->pl.x += -dir * s->pl.dirY * speed;
-	if (ch_colls(s->map[(int)(s->pl.y + dir * s->pl.dirX * (speed + 0.3))][(int)s->pl.x]))
-		s->pl.y += dir * s->pl.dirX * speed;
+	if (ch_colls(s->map[(int)s->pl.y][(int)(s->pl.x + -dir * s->pl.diry *
+		(speed + 0.3))]))
+	{
+		s->pl.x += -dir * s->pl.diry * speed;
+	}
+	if (ch_colls(s->map[(int)(s->pl.y + dir * s->pl.dirx *
+		(speed + 0.3))][(int)s->pl.x]))
+	{
+		s->pl.y += dir * s->pl.dirx * speed;
+	}
 }
 
-void			moveplayer(t_set *s)
+void		moveplayer(t_set *s)
 {
 	double speed;
 

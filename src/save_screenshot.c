@@ -6,17 +6,17 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 22:35:25 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 17:12:15 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:39:00 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static unsigned char	*create_fileheader(int x, int y)
 {
-	static unsigned char			header[14];
+	static unsigned char	header[14];
 	int						size;
-	int padding;
+	int						padding;
 
 	ft_bzero(&header, 14);
 	padding = (4 - (x * 3) % 4) % 4;
@@ -50,7 +50,7 @@ static unsigned char	*create_infoheader(int x, int y)
 	return (header);
 }
 
-static void		write_image(t_set *s, int fd)
+static void				write_image(t_set *s, int fd)
 {
 	unsigned char	rgb[3];
 	int				i;
@@ -65,7 +65,8 @@ static void		write_image(t_set *s, int fd)
 		k = 0;
 		while (k < s->size_x)
 		{
-			p = (*(int*)(s->img->addr + (k * s->img->bits_per_pixel / 8 + y * s->img->line_length)));
+			p = (*(int*)(s->img->addr +
+				(k * s->img->bits_per_pixel / 8 + y * s->img->line_length)));
 			rgb[2] = (unsigned char)(p / 65536);
 			rgb[1] = (unsigned char)((p - (rgb[1] * 65536)) / 256);
 			rgb[0] = (unsigned char)(p - ((rgb[1] * 65536) + (rgb[2] * 256)));
@@ -76,7 +77,7 @@ static void		write_image(t_set *s, int fd)
 	}
 }
 
-void	save_screenshot(t_set *s)
+void					save_screenshot(t_set *s)
 {
 	int				fd;
 	unsigned char	*infoheader;

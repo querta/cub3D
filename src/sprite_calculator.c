@@ -6,17 +6,17 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 18:33:24 by mmonte            #+#    #+#             */
-/*   Updated: 2021/02/27 20:52:25 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:39:03 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
-static	void	sort_sprites(t_set *s)
+static void	sort_sprites(t_set *s)
 {
-	int i;
-	int k;
-	t_curspr tmp;
+	int			i;
+	int			k;
+	t_curspr	tmp;
 
 	i = 0;
 	while (i < s->sp->count)
@@ -24,11 +24,11 @@ static	void	sort_sprites(t_set *s)
 		k = s->sp->count - 1;
 		while (k >= i)
 		{
-			if (s->spr[k-1].dist <= s->spr[k].dist)
+			if (s->spr[k - 1].dist <= s->spr[k].dist)
 			{
-				tmp = s->spr[k-1];
-				s->spr[k-1] = s->spr[k];
-				s->spr[k]=tmp;
+				tmp = s->spr[k - 1];
+				s->spr[k - 1] = s->spr[k];
+				s->spr[k] = tmp;
 			}
 			k--;
 		}
@@ -36,23 +36,23 @@ static	void	sort_sprites(t_set *s)
 	}
 }
 
-void sprite_calculator(t_set *s, t_point *map)
+void		sprite_calculator(t_set *s)
 {
-	double distance;
-	int i;
+	double	distance;
+	int		i;
 
-	(void)map;
 	i = 0;
 	while (i < s->sp->count)
 	{
-		distance = ((s->pl.y - s->spr[i].x) * (s->pl.y - s->spr[i].x) + (s->pl.x - s->spr[i].y) * (s->pl.x - s->spr[i].y));
-		s->spr[i].dist =  distance;
+		distance = ((s->pl.y - s->spr[i].x) * (s->pl.y - s->spr[i].x) +
+			(s->pl.x - s->spr[i].y) * (s->pl.x - s->spr[i].y));
+		s->spr[i].dist = distance;
 		i++;
 	}
 	sort_sprites(s);
 }
 
-void save_sprites(t_set *s)
+void		save_sprites(t_set *s)
 {
 	int i;
 	int k;

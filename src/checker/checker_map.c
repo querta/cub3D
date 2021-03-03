@@ -6,11 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:19:50 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 15:48:34 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:37:51 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static int	checker_filler_map(t_set *s, char **map)
 {

@@ -6,11 +6,11 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:23:46 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 15:50:12 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 17:37:48 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static int	check_cross(char **map, int y, int x)
 {

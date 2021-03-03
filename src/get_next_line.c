@@ -6,11 +6,10 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 20:50:32 by mmonte            #+#    #+#             */
-/*   Updated: 2021/01/24 18:40:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 16:53:31 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "cub3D.h"
 #include "utils.h"
 
 static	int		ft_lastline(char **line, char **saver, char **buf, int ret)
@@ -49,7 +48,7 @@ static	char	*ft_savecheck(char **saver, char **buf)
 	return (tmp);
 }
 
-int		get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
 	char		*buf;
 	int			rb;

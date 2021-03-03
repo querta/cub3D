@@ -6,11 +6,24 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:32:10 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/02 15:47:21 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/03 18:32:02 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
+
+int	check_texsize(t_set *s)
+{
+	if (s->tex->no->he == s->tex->so->he &&
+		s->tex->no->he == s->tex->we->he && s->tex->no->he == s->tex->ea->he)
+	{
+		if (s->tex->no->wi == s->tex->so->wi
+			&& s->tex->no->wi == s->tex->we->wi
+			&& s->tex->no->wi == s->tex->ea->wi)
+			return (1);
+	}
+	return (0);
+}
 
 int	check_settings(t_set *set)
 {
