@@ -6,7 +6,7 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:40:41 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/03 18:22:30 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/04 14:54:40 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct	s_settings
 	int			save;
 	int			f;
 	int			c;
+	int			a;
 	char		**map;
 	t_player	pl;
 	t_mlx		*mlx;

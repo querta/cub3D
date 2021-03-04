@@ -6,11 +6,12 @@
 /*   By: mmonte <mmonte@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 18:35:26 by mmonte            #+#    #+#             */
-/*   Updated: 2021/03/03 18:32:47 by mmonte           ###   ########.fr       */
+/*   Updated: 2021/03/04 14:54:32 by mmonte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 static void	parse_res(t_set *set, char *parstr)
 {
@@ -47,7 +48,9 @@ static	int	validate_map_line(char *str, t_set *set)
 
 	s = str;
 	i = 0;
-	if (check_settings(set))
+	if (*str == '\0' && set->a == 1)
+		set->a = 2;
+	if (check_settings(set) && set->a != 2)
 	{
 		if (ft_strchr(s, '0') || ft_strchr(s, '1'))
 		{
@@ -60,6 +63,7 @@ static	int	validate_map_line(char *str, t_set *set)
 				else
 					error(set, ER_MAP);
 			}
+			set->a = 1;
 			return (1);
 		}
 	}
