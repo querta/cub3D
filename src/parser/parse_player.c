@@ -60,9 +60,7 @@ int			parse_player(t_set *s)
 	int		i;
 	int		y;
 	char	*c;
-	int		ret;
 
-	ret = 0;
 	c = "NSEW";
 	i = 0;
 	y = 0;

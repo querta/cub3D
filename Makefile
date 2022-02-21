@@ -16,7 +16,7 @@ MLX = libmlx.dylib
 
 CC = @gcc
 FLAGS = -Wall -Wextra -Werror
-HEADER = includes/
+HEADER = includes
 
 SRC_DIR = src/
 LIBFT_DIR = $(SRC_DIR)libft/

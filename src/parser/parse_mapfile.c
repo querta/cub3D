@@ -43,11 +43,9 @@ static void	parse_res(t_set *set, char *parstr)
 
 static	int	validate_map_line(char *str, t_set *set)
 {
-	int		i;
 	char	*s;
 
 	s = str;
-	i = 0;
 	if (*str == '\0' && set->a == 1)
 		set->a = 2;
 	if (check_settings(set) && set->a != 2)
